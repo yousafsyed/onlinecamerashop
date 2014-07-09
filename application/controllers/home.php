@@ -6,6 +6,7 @@ class Home extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        $this->load->model('users_model');
     }
 
     public function index()
@@ -35,14 +36,42 @@ class Home extends CI_Controller
         if (empty($username) || empty($password) || empty($password2) || empty($email) ||
             empty($mobile) || empty($address)) {
             echo json_encode(array('error' => 'Please fill in required fields'));
-        } elseif (!filter_var($email, VALIDATE_EMAIL)) {
+        } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
             echo json_encode(array('error' => 'Email is not valid'));
         } elseif ($password != $password2) {
             echo json_encode(array('error' => 'password doesnot matched'));
-        } elseif(!is_valid_mobile_number($mobile)){
+        } elseif(!$this->is_valid_mobile_number($mobile)){
             echo json_encode(array('error' => 'Mobile number is not valid'));
-        }else{// register the user
-            
+        }elseif($this->users_model->is_email_exist($email)){
+              echo json_encode(array('error' => 'Email already exists'));
+        }
+        
+        else{// register the user
+             echo json_encode(array('success' => 'Everything is valid'));
+        }
+    }
+    public function checkemail(){
+        $email = $this->input->post('email', true);
+        if(empty($email)){
+            echo json_encode(array('error' => 'Email is required'));
+        }elseif(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+             echo json_encode(array('error' => 'Email is not valid'));
+        }elseif($this->users_model->is_email_exist($email)){
+            echo json_encode(array('error' => 'Email already exists'));
+        }else{
+            echo json_encode(array('success' => 'Email is valid'));
+        }
+    }
+ public function checkmobile(){
+        $mobile = $this->input->post('mobile', true);
+        if(empty($mobile)){
+            echo json_encode(array('error' => 'Mobile No is required'));
+        }elseif(!$this->is_valid_mobile_number($mobile) ){
+             echo json_encode(array('error' => 'Mobile No is not valid'));
+        }elseif($this->users_model->is_mobile_exist($mobile)){
+            echo json_encode(array('error' => 'Mobile No already exists'));
+        }else{
+            echo json_encode(array('success' => 'Mobile is valid'));
         }
     }
 

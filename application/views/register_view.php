@@ -8,8 +8,8 @@
 	Username:<input name="username" type="text"><br>
 	Password:<input name="password" type="password"><br>
     Password confirm<input name="password2" type="password"><br>
-    email:<input name="email" type="email"><br>
-    mobile No:<input name="mobile" type="number"><br>
+    email:<input id="email" name="email" type="email"><span id="email_message"></span><br>
+    mobile No:<input id="mobile" name="mobile" type="number"><span id="mobile_message"></span><br>
     address:<input name="address" type="text"><br>
 
 	<input id="register_btn" type="submit">
@@ -22,12 +22,13 @@ $(document).ready(function(){
     $("#register_btn").click(function(e){
         e.preventDefault();
         $.ajax({
-            url :"",
+            url :"http://localhost:8080/onlinecamerashop/index.php/home/register_request",
             type:"POST",
             data:$("#register_form").serialize(),
             dataType:"json",
             success:function(data){
                 if(typeof(data.error) == "undefined"){
+                  
                     $("#message").text(data.success);
                     $("#message").css("color","green");
                 }else{
@@ -39,6 +40,48 @@ $(document).ready(function(){
         });
 
     });// resgiter function ends
+    // check if email exist
+     $("#email").focusout(function(){
+         $.ajax({
+            url :"http://localhost:8080/onlinecamerashop/index.php/home/checkemail",
+            type:"POST",
+            data:{email:$("#email").val()},
+            dataType:"json",
+            success:function(data){
+                if(typeof(data.error) == "undefined"){
+                  
+                    $("#email_message").text(data.success);
+                    $("#email_message").css("color","green");
+                }else{
+                    $("#email_message").text(data.error);
+                      $("#email_message").css("color","red");
+                }
+            }
+            
+        });
+
+     });// check email exist ends
+        // check if email exist
+     $("#mobile").focusout(function(){
+         $.ajax({
+            url :"http://localhost:8080/onlinecamerashop/index.php/home/checkmobile",
+            type:"POST",
+            data:{mobile:$("#mobile").val()},
+            dataType:"json",
+            success:function(data){
+                if(typeof(data.error) == "undefined"){
+                  
+                    $("#mobile_message").text(data.success);
+                    $("#mobile_message").css("color","green");
+                }else{
+                    $("#mobile_message").text(data.error);
+                      $("#mobile_message").css("color","red");
+                }
+            }
+            
+        });
+
+     });// check email exist ends
     
 });// document ready ends
 </script>
