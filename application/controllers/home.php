@@ -18,5 +18,9 @@ class Home extends CI_Controller {
 			);
 		$this->load->view('login_view',$data);
 	}
+
+	public function register(){
+		
+	}
 }
 
