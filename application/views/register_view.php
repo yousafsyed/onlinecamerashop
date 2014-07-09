@@ -19,7 +19,7 @@
 <script>
 $(document).ready(function(){
     // register user
-    $("#resgister_btn").click(function(e){
+    $("#register_btn").click(function(e){
         e.preventDefault();
         $.ajax({
             url :"",
