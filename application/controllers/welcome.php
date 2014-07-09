@@ -2,7 +2,7 @@
 
 class Welcome extends CI_Controller {
 
-
+//majid //
 	public function index()
 	{
 		$this->load->view('welcome_message');
