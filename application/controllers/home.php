@@ -1,6 +1,8 @@
 <?php
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
+require_once(APPPATH."libraries/smscenterdotpk.php");
+
 class Home extends CI_Controller
 {
     public function __construct() {
@@ -18,6 +20,16 @@ class Home extends CI_Controller
         $page_title = "Login Page";
         $data = array("page_title" => $page_title);
         $this->load->view('login_view', $data);
+    }
+    public function login_request(){
+        //email
+
+        //password
+
+        //create password_hash
+
+        //create function in users_model that will receieve 2 params (email,password_hash) return (true,false)
+
     }
     
     public function register() {
@@ -69,13 +81,15 @@ Your account has been created successfully
 Regards
 ShopName
 
-
                 ";
                // $this->send_email($to, $subject, $message);
-                
+            
                 //send sms
-                echo base_url('index.php/home/confirmEmail?code=' . $email_confirmation_code);
-                echo json_encode(array('success' => 'Your account hasbeen created successfully, you will receive an email and sms to confirm your email and mobile no.'));
+                    //TESTING SENDSMS
+                $sms = new smscenterdotpk('6f970b1226f3150e7805');
+                $sms->sendsms($mobile, "Hi $username, Your confirmation code for mobile is $mobile_confirmation_code. Please logon to ".base_url('index.php/home/login')." and goto settings to confirm your mobile no.", 0);
+               $url = base_url('index.php/home/confirmEmail?code=' . $email_confirmation_code);
+                echo json_encode(array('success' => 'Your account hasbeen created successfully, you will receive an email and sms to confirm your email and mobile no. '.$url));
             } else {
                 echo json_encode(array('error' => 'Something went wrong while creating your account please contact administrator (ERROR CODE: 60)'));
             }

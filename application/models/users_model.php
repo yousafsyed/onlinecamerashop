@@ -85,6 +85,10 @@ class Users_model extends  CI_Model{
         }
     }
 
+    function login_confirmation($email,$password_hash){
+     // code here
+    }
+
     function confirm_email($user_id){
         $data = array(
 
