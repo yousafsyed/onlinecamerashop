@@ -117,7 +117,9 @@ ShopName
             if($user_id != false){
                 $user_id = $user_id['user_id'];
                 $this->users_model->confirm_email($user_id);
+                 echo "Your email is confirmed";
             }else{
+               
                 echo "This email confirmation code doesnot exists";
             }
         }
