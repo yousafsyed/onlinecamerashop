@@ -53,17 +53,18 @@ class Users_model extends  CI_Model{
      * @param mixed $address
      * @return
      */
-    function insert_user($email,$name,$password,$address,$email_confirmation_code,$mobile,$mobile_confirmation_code,$address)
+    function insert_user($email,$name,$password,$address,$email_confirmation_code,$mobile,$mobile_confirmation_code)
     {
         $data = array(
         "user_name"=>$name,
         "user_email"=>$email,
-        "password"=>$password,
+        "user_password"=>$password,
         "mobile_no"=>$mobile,
         "user_address"=>$address,
-        "email_confirmation"=>$email_confirmation_code,
-        "mobile_confirmation"=>$mobile_confirmation_code
+        "email_confirmation_code"=>$email_confirmation_code,
+        "mobile_confirmation_code"=>$mobile_confirmation_code
         );
+
         $query = $this->db->insert("onlinecamerashop_users",$data);
         if($this->db->affected_rows() > 0){
             return true;
@@ -71,5 +72,30 @@ class Users_model extends  CI_Model{
             return false;
         }
         
+    }
+
+    function compare_email_code($email_confirmation_code){
+        $this->db->select("user_id");
+        $this->db->where("email_confirmation_code",$email_confirmation_code);
+        $query = $this->db->get("onlinecamerashop_users");
+        if($query->num_rows() > 0){
+            return $query->row_array();
+        }else{
+            return false;
+        }
+    }
+
+    function confirm_email($user_id){
+        $data = array(
+
+            "email_confirmed"=>"yes"
+            );
+        $this->db->where("user_id",$user_id);
+        $this->db->update("onlinecamerashop_users",$data);
+        if($this->db->affected_rows() > 0){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
