@@ -5,16 +5,26 @@ require_once(APPPATH."libraries/smscenterdotpk.php");
 
 class Home extends CI_Controller
 {
+    public $email;
     public function __construct() {
         parent::__construct();
         $this->load->model('users_model');
         $this->load->library('email');
         $this->load->helper('url');
         $this->load->library("session");
+        $email = $this->session->userdata('email');
+        if(!empty($email)){
+            $this->email =$email;
+        }
     }
     
     public function index() {
-        $this->load->view('home_view');
+        if(!empty($this->email)){// user
+            $this->load->view('home_view');
+        }else{ // gues
+            $this->load->view('home_view');
+        }
+        
     }
     
     public function login() {
@@ -29,7 +39,7 @@ class Home extends CI_Controller
         $password = $this->input->post('userpassword', true);
         //create password_hash
         $password_hash = md5($password);
-        $login = $this->users_model->insert_user($email, $password_hash );
+        $login = $this->users_model->login_confirmation($email, $password_hash );
         if ($login){
             $session_data = array(
             "email"=>$email
