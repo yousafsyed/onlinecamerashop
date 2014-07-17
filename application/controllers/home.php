@@ -29,6 +29,7 @@ class Home extends CI_Controller
         } else {
             //not logged it
                 $data['user_name'] ='Guest';
+                $data['email'] ='Guest';
                 $data['logged_in']= false;
             
         }
