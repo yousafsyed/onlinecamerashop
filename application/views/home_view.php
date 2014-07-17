@@ -67,15 +67,14 @@
 		float:left;
 		font-weight:bold;
 	}
-	.box_size
-	{
-		height:350px;
-		width:50%;
-		margin-left:25%;
-		border-radius: 3px;
-		margin-top:30px;
-		float:left;
-	}
+.box_size {
+    height: 350px;
+    width: 56%;
+    border-radius: 3px;
+    margin-top: 30px;
+    margin: auto;
+    min-width: 747px;
+}
 	.landscape
 	{
 		width: 100%;
@@ -140,7 +139,9 @@
 </style>
 
 <div class = "header">
-	<div class = "web_name1">Karachi</div>
+	
+    
+    <div class = "web_name1">Karachi</div>
 	<div class = "under_name">
 		<div class = "web_name2"> Camera Center </div>
 		<div class = "navigation_box"> 
@@ -167,12 +168,13 @@ Hi, <?=$email;?>
 <div class="catagory_box box_size">
 	<div  class = "landscape">
 		
-	   <div class = "landscape_header"> <hr style="float: left; margin-top:15px;"> Header Name <hr style="float: right; margin-top:15px;">  </div>
+	   <div class = "landscape_header">Categories
+	     <hr style="float: right; margin-top:15px;">  </div>
 		<div class="pics_box">
-			<div class="pic_box"> <img class="pic_img" src="" alt="" /></div><div class = "tiny_separator for_pic"></div>
-			<div class="pic_box"> <img class="pic_img" src="" alt="" /></div><div class = "tiny_separator for_pic"></div>
-			<div class="pic_box"> <img class="pic_img" src="" alt="" /></div><div class = "tiny_separator for_pic"></div>
-			<div class="pic_box"> <img class="pic_img" src="" alt="" /></div>
+			<div class="pic_box"> <img class="pic_img" src="<?=base_url('public/images/camera.jpg')?>" alt="" /></div><div class = "tiny_separator for_pic"></div>
+			<div class="pic_box"> <img class="pic_img" src="<?=base_url('public/images/lenses.jpg')?>" alt="" /></div><div class = "tiny_separator for_pic"></div>
+			<div class="pic_box"> <img class="pic_img" src="<?=base_url('public/images/stand.jpg')?>" alt="" /></div><div class = "tiny_separator for_pic"></div>
+			<div class="pic_box"> <img class="pic_img" src="<?=base_url('public/images/cameras.jpg')?>" alt="" /></div>
 		</div>
 	</div>
 	<div class = "landscape_tiny_box"></div><div class = "tiny_separator"></div>
@@ -183,12 +185,13 @@ Hi, <?=$email;?>
 <div class="latest box_size">
 	<div  class = "landscape">
 		
-		<div class = "landscape_header"> <hr style="float: left; margin-top:15px;"> Header Name <hr style="float: right; margin-top:15px;">  </div>
+		<div class = "landscape_header"> Latest Products
+		  <hr style="float: right; margin-top:15px;">  </div>
 		<div class="pics_box">
-			<div class="pic_box"> <img class="pic_img" src="" alt="" /></div><div class = "tiny_separator for_pic"></div>
-			<div class="pic_box"> <img class="pic_img" src="" alt="" /></div><div class = "tiny_separator for_pic"></div>
-			<div class="pic_box"> <img class="pic_img" src="" alt="" /></div><div class = "tiny_separator for_pic"></div>
-			<div class="pic_box"> <img class="pic_img" src="" alt="" /></div>
+			<div class="pic_box"> <img class="pic_img" src="../../images/lenses.jpg" alt="" /></div><div class = "tiny_separator for_pic"></div>
+			<div class="pic_box"> <img class="pic_img" src="../../images/others.jpg" alt="" /></div><div class = "tiny_separator for_pic"></div>
+			<div class="pic_box"> <img class="pic_img" src="../../images/stand.jpg" alt="" /></div><div class = "tiny_separator for_pic"></div>
+			<div class="pic_box"> <img class="pic_img" src="../../images/cameras.jpg" alt="" /></div>
 		</div>
 		</div>
 	<div class = "landscape_tiny_box"></div><div class = "tiny_separator"></div>
@@ -199,7 +202,8 @@ Hi, <?=$email;?>
 <div class="blog box_size">
 	<div class = "landscape">
 		
-		<div class = "landscape_header"> <hr style="float: left; margin-top:15px;"> Header Name <hr style="float: right; margin-top:15px;">  </div>
+		<div class = "landscape_header"> Latest Blog
+		  <hr style="float: right; margin-top:15px;">  </div>
 		
 		<div class="pics_box">
 			<div class="pic_box"> <img class="pic_img" src="" alt="" /> </div><div class = "tiny_separator for_pic"></div>
