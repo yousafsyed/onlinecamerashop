@@ -1,58 +1,79 @@
 <?php
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once(APPPATH."libraries/smscenterdotpk.php");
+require_once (APPPATH . "libraries/smscenterdotpk.php");
 
 class Home extends CI_Controller
 {
-    public $email;
+
     public function __construct() {
         parent::__construct();
         $this->load->model('users_model');
         $this->load->library('email');
         $this->load->helper('url');
         $this->load->library("session");
-        $email = $this->session->userdata('email');
-        if(!empty($email)){
-            $this->email =$email;
-        }
+        
+     
     }
     
     public function index() {
-        if(!empty($this->email)){// user
-            $this->load->view('home_view');
-        }else{ // gues
-            $this->load->view('home_view');
+        $email = $this->session->userdata('email');
+        $data = array();
+        if (!empty($email)) {
+              $data["email"]=   $email;
+        } else {
+                $data["email"] ="Guest";
+            
         }
-        
+        $this->load->view('home_view',   $data);
     }
     
     public function login() {
+        
+        /**
+         * if user is logged in already redirect them to the home
+         *
+         */
+         $email = $this->session->userdata('email');
+        if (!empty($email)) {
+            header("Location:" . base_url());
+        }
+        
         $page_title = "Login Page";
         $data = array("page_title" => $page_title);
         $this->load->view('login_view', $data);
     }
-    public function login_request(){
+    public function login_request() {
+        
         //email
         $email = $this->input->post('useremail', true);
+        
         //password
         $password = $this->input->post('userpassword', true);
+        
         //create password_hash
         $password_hash = md5($password);
-        $login = $this->users_model->login_confirmation($email, $password_hash );
-        if ($login){
-            $session_data = array(
-            "email"=>$email
-            );
+        $login = $this->users_model->login_confirmation($email, $password_hash);
+        if ($login) {
+            $session_data = array("email" => $email);
             $this->session->set_userdata($session_data);
-            echo json_encode(array("success"=>"Logged in successfully"));
-        } else{
-            echo json_encode(array("error"=>"Username or password is incorrect"));
+            echo json_encode(array("success" => "Logged in successfully"));
+        } else {
+            echo json_encode(array("error" => "Username or password is incorrect"));
         }
-        
     }
     
     public function register() {
+        
+        /**
+         * if user is logged in already redirect them to the home
+         *
+         */
+          $email = $this->session->userdata('email');
+        if (!empty($email)) {
+            header("Location:" . base_url());
+        }
+        
         $this->load->view('register_view');
     }
     public function register_request() {
@@ -102,14 +123,15 @@ Regards
 ShopName
 
                 ";
-               // $this->send_email($to, $subject, $message);
-            
+                
+                // $this->send_email($to, $subject, $message);
+                
                 //send sms
-                    //TESTING SENDSMS
+                //TESTING SENDSMS
                 $sms = new smscenterdotpk('6f970b1226f3150e7805');
-                $sms->sendsms($mobile, "Hi $username, Your confirmation code for mobile is $mobile_confirmation_code. Please logon to ".base_url('index.php/home/login')." and goto settings to confirm your mobile no.", 0);
-               $url = base_url('index.php/home/confirmEmail?code=' . $email_confirmation_code);
-                echo json_encode(array('success' => 'Your account hasbeen created successfully, you will receive an email and sms to confirm your email and mobile no. '.$url));
+                $sms->sendsms($mobile, "Hi $username, Your confirmation code for mobile is $mobile_confirmation_code. Please logon to " . base_url('index.php/home/login') . " and goto settings to confirm your mobile no.", 0);
+                $url = base_url('index.php/home/confirmEmail?code=' . $email_confirmation_code);
+                echo json_encode(array('success' => 'Your account hasbeen created successfully, you will receive an email and sms to confirm your email and mobile no. ' . $url));
             } else {
                 echo json_encode(array('error' => 'Something went wrong while creating your account please contact administrator (ERROR CODE: 60)'));
             }
@@ -140,25 +162,29 @@ ShopName
         }
     }
     
-
-
-    public function confirmEmail(){
-        $email_confirmation_code = $this->input->get('code',true);
-        if(empty( $email_confirmation_code)){
+    public function confirmEmail() {
+        $email_confirmation_code = $this->input->get('code', true);
+        if (empty($email_confirmation_code)) {
             echo "Not Authorized";
-        }else{
+        } else {
             $user_id = $this->users_model->compare_email_code($email_confirmation_code);
-            if($user_id != false){
+            if ($user_id != false) {
                 $user_id = $user_id['user_id'];
                 $this->users_model->confirm_email($user_id);
-                 echo "Your email is confirmed";
-            }else{
-               
+                echo "Your email is confirmed";
+            } else {
+                
                 echo "This email confirmation code doesnot exists";
             }
         }
     }
-
+    
+    public function logout() {
+        $this->session->sess_destroy();
+        header("Location:" . base_url());
+    }
+    
+    // protected and private functions
     private function is_valid_mobile_number($telNumber) {
         if (!is_string($telNumber) && !is_int($telNumber)) return false;
         
@@ -172,17 +198,21 @@ ShopName
     
     protected function send_email($to, $subject, $message) {
         $config = Array('protocol' => 'smtp',
-         //outgoing server protocol
+        
+        //outgoing server protocol
         'smtp_host' => '',
-         //smpt server url
+        
+        //smpt server url
         'smtp_port' => 25,
-         //smtp port of server
+        
+        //smtp port of server
         'smtp_user' => '', 'smtp_pass' => '', 'mailtype' => 'html', 'charset' => 'utf-8', 'wordwrap' => TRUE);
         
         $this->load->library('email', $config);
         $this->email->set_newline("\r\n");
         $this->email->from('');
-         // set the sender email
+        
+        // set the sender email
         //change it to yours
         $this->email->to($to);
         
@@ -197,6 +227,7 @@ ShopName
             show_error($this->email->print_debugger());
             
             //return false;
+            
             
         }
     }

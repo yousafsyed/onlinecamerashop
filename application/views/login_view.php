@@ -20,7 +20,7 @@ $(document).ready(function(){
     $("#login_btn").click(function(e){
         e.preventDefault();
         $.ajax({
-            url :"http://localhost:8080/onlinecamerashop/index.php/home/login_request",
+            url :"<?=base_url('index.php/home/login_request')?>",
             type:"POST",
             data:$("#login_form").serialize(),
             dataType:"json",
@@ -29,6 +29,9 @@ $(document).ready(function(){
                   
                     $("#message").text(data.success);
                     $("#message").css("color","green");
+                    setTimeout(function(){
+                        window.location = "<?=base_url('index.php/home')?>"
+                    },500);
                 }else{
                     $("#message").text(data.error);
                       $("#message").css("color","red");

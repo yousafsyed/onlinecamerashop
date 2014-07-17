@@ -150,11 +150,12 @@
 			  <div class = "navig_dividors">/</div>
 			  <div class = "navigate_buttons">About</div>
 			  <div class = "navig_dividors">/</div> 
-			  <div class = "navigate_buttons">Blog</div>
+			  <div class = "navigate_buttons"><a href="<?=base_url('index.php/home/logout')?>">logout</a></div>
 	   </div>
 	</div>
 </div>
 
+Hi, <?=$email;?>
 
 <div class="black_box box_size">
 	<div class = "landscape" style="background-color: #0b0000;"></div>

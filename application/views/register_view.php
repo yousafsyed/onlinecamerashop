@@ -22,7 +22,7 @@ $(document).ready(function(){
     $("#register_btn").click(function(e){
         e.preventDefault();
         $.ajax({
-            url :"http://localhost:8080/onlinecamerashop/index.php/home/register_request",
+            url :"<?=base_url('index.php/home/register_request')?>",
             type:"POST",
             data:$("#register_form").serialize(),
             dataType:"json",
@@ -43,7 +43,7 @@ $(document).ready(function(){
     // check if email exist
      $("#email").focusout(function(){
          $.ajax({
-            url :"http://localhost:8080/onlinecamerashop/index.php/home/checkemail",
+            url :"<?=base_url('index.php/home/checkemail')?>",
             type:"POST",
             data:{email:$("#email").val()},
             dataType:"json",
@@ -64,7 +64,7 @@ $(document).ready(function(){
         // check if email exist
      $("#mobile").focusout(function(){
          $.ajax({
-            url :"http://localhost:8080/onlinecamerashop/index.php/home/checkmobile",
+            url :"<?=base_url('index.php/home/checkmobile')?>",
             type:"POST",
             data:{mobile:$("#mobile").val()},
             dataType:"json",
