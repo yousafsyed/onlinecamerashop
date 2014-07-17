@@ -111,4 +111,15 @@ class Users_model extends  CI_Model{
             return false;
         }
     }
+    function get_user_by_email($email){
+        $this->db->select("*");
+        $this->db->where("user_email",$email);
+       
+        $query = $this->db->get("onlinecamerashop_users");
+        if($query->num_rows() > 0){
+            return $query->row_array();
+        }else{
+            return false;
+        }
+    }
 }

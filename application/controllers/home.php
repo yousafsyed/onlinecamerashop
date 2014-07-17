@@ -20,9 +20,16 @@ class Home extends CI_Controller
         $email = $this->session->userdata('email');
         $data = array();
         if (!empty($email)) {
-              $data["email"]=   $email;
+            // get user data
+            $userdata = $this->users_model->get_user_by_email($email);
+
+              $data['email']=   $email;
+              $data['user_name']= $userdata['user_name'];
+               $data['logged_in']= true;
         } else {
-                $data["email"] ="Guest";
+            //not logged it
+                $data['user_name'] ='Guest';
+                $data['logged_in']= false;
             
         }
         $this->load->view('home_view',   $data);
