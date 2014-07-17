@@ -10,6 +10,7 @@ class Home extends CI_Controller
         $this->load->model('users_model');
         $this->load->library('email');
         $this->load->helper('url');
+        $this->load->library("session");
     }
     
     public function index() {
@@ -23,13 +24,22 @@ class Home extends CI_Controller
     }
     public function login_request(){
         //email
-
+        $email = $this->input->post('useremail', true);
         //password
-
+        $password = $this->input->post('userpassword', true);
         //create password_hash
-
-        //create function in users_model that will receieve 2 params (email,password_hash) return (true,false)
-
+        $password_hash = md5($password);
+        $login = $this->users_model->insert_user($email, $password_hash );
+        if ($login){
+            $session_data = array(
+            "email"=>$email
+            );
+            $this->session->set_userdata($session_data);
+            echo json_encode(array("success"=>"Logged in successfully"));
+        } else{
+            echo json_encode(array("error"=>"Username or password is incorrect"));
+        }
+        
     }
     
     public function register() {
