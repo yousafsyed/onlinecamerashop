@@ -7,23 +7,26 @@
 <body>
 
 
-
-<div class = "header">
+<div class="header">
 	
     
-    <div class = "web_name1">Karachi</div>
-	<div class = "under_name">
-		<div class = "web_name2"> Camera Center </div>
-		<div class = "navigation_box"> 
-			  <div class = "navigate_buttons" style="margin-left: 150px;">Home</div>
-			  <div class = "navig_dividors">/</div>
-			  <div class = "navigate_buttons">Shop</div>
-			  <div class = "navig_dividors">/</div>
-			  <div class = "navigate_buttons">About</div>
-			  <div class = "navig_dividors">/</div> 
-			  <div class = "navigate_buttons"><a href="<?=base_url('index.php/home/logout')?>">logout</a></div>
-	   </div>
-	</div>
+    <span class="web_name1">Karachi</span>
+	<span class="under_name">
+		
+		<span class="navigation_box"> 
+				  <nav class="mainNav">
+				    <ul>
+				<li><a href="#">
+				Home
+				</a></li>
+
+				<li><a href="#">
+				About
+				</a></li>
+
+				</ul></nav><a>
+				</a></span>
+	</span>
 </div>
 
 Hi, <?=$email;?>
