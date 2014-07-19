@@ -80,28 +80,36 @@ $(document).ready(function(){
           </ul>
         </li>
       </ul>
+
+      	<form id="login_form" class="navbar-form navbar-left" role="Search">
+						<div class="form-group">
+						<input type="text" name="q" class="form-control" placeholder="Search">
+
+						</div>
+					<button type="submit"  class="btn btn-default">Submit</button>
+	</form>
 <?php if (!$logged_in) {?>
 	<form id="login_form" class="navbar-form navbar-right" role="login">
-						<div class="form-group">
-										<input type="text" name="useremail" class="form-control" placeholder="john@gmail.com">
-														<input type="password" name="userpassword"  class="form-control" placeholder="password">
-																													        </div>
-									<button type="submit" id="login_btn" class="btn btn-default">Submit</button>
-																													      </form>
+											<div class="form-group">
+															<input type="text" name="useremail" class="form-control" placeholder="john@gmail.com">
+																			<input type="password" name="userpassword"  class="form-control" placeholder="password">
+																																		        </div>
+														<button type="submit" id="login_btn" class="btn btn-default">Submit</button>
+																																		      </form>
 	<?php } else {?>
-																													<ul class="nav navbar-nav navbar-right">
+				<ul class="nav navbar-nav navbar-right">
 
-																													        <li class="dropdown">
-																													          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?=$user_name?><span class="caret"></span></a>
-																													          <ul class="dropdown-menu" role="menu">
-																													            <li><a href="#">Action</a></li>
-																													            <li><a href="#">Another action</a></li>
-																													            <li><a href="#">Something else here</a></li>
-																													            <li class="divider"></li>
-																													            <li><a href="<?=base_url('index.php/home/logout')?>">Logout</a></li>
-																													          </ul>
-																													        </li>
-																													      </ul>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?=$user_name?><span class="caret"></span></a>
+									<ul class="dropdown-menu" role="menu">
+										<li><a href="#">Action</a></li>
+										<li><a href="#">Another action</a></li>
+										<li><a href="#">Something else here</a></li>
+										<li class="divider"></li>
+										<li><a href="<?=base_url('index.php/home/logout')?>">Logout</a></li>
+									</ul>
+									</li>
+						</ul>
 	<?php }?>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
