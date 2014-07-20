@@ -7,6 +7,7 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('public/css/bootstrap-theme.min.css"')?>">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('public/style.css')?>">
 <script src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript" src="<?=base_url('public/js/casousel.js')?>"></script>
 <!-- Latest compiled and minified JavaScript -->
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script>
@@ -29,8 +30,9 @@ $(document).ready(function(){
                         window.location = "<?php echo base_url('index.php/home')?>"
                     },500);
                 }else{
-                    $("#message").show();
+                    $("#message").slideDown();
                     $("#message .messageclass").text(data.error);
+                    $("#message").trigger('hide_error_message');
                 }
             }
 
@@ -39,54 +41,27 @@ $(document).ready(function(){
     });// login function ends
 
 
-
-$(function() {
-		var step = 4;
-		var current = 0;
-		var maximum = $('#my_carousel ul li').size();
-		var visible = 4;
-		var speed = 200;
-		var liSize = 250;
-		var carousel_height = 300;
-
-
-		var ulSize = (liSize)*maximum;
-		var divSize = (liSize) * visible;
-
-		$('#my_carousel ul').css("width", ulSize+"px").css("left", -(current * liSize)).css("position", "absolute");
-
-		$('#my_carousel').css("width", divSize+"px").css("height", carousel_height+"px").css("visibility", "visible").css("overflow", "hidden").css("position", "relative");
-
-		$('.btnnext').click(function() {
-			if(current + step < 0 || current + step > maximum - visible) {return; }
-			else {
-				current = current + step;
-				$('#my_carousel ul').animate({left: -(liSize * current)}, speed, null);
-			}
-			return false;
-		});
-
-		$('.btnprev').click(function() {
-			if(current - step < 0 || current - step > maximum - visible) {return; }
-			else {
-				current = current - step;
-				$('#my_carousel ul').animate({left: -(liSize * current)}, speed, null);
-			}
-			return false;
-		});
-	});
-
+$('#categories').casrousel();
+$('#latest_products').casrousel();
+$("#message").on('hide_error_message',function(){
+	setTimeout(function(){
+		$("#message").slideUp();
+	},2000);
+});
 
 });// document ready ends
 </script>
 </head>
 <body>
 
-<div id="message" style="display:none;margin:0;border-radius:0;" class="alert alert-danger fade in" role="alert">
+<div id="message" style="display:none;margin:0;border-radius:0; position: fixed;
+top: 51;
+width: 100%;
+z-index: 10000" class="alert alert-danger fade in" role="alert">
 
       <span class="messageclass"></span>
 </div>
-<nav class="navbar navbar-default" role="navigation">
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -165,15 +140,19 @@ endif;?>
 	<div class = "landscape_tiny_box"></div>
 </div> -->
 <div class="row">
-<button class="btnprev">Previous
-  </button>
-<button class="btnnext">Next
-  </button>
+
 	   <div class="landscape_header col-6">Categories</div>
-			<div id="my_carousel">
+			<div id="categories">
+<!--// controls-->
+<a class="btnprev"><span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
+<a class="btnnext"><span class="glyphicon glyphicon-chevron-right"></span>
+  </a>
+
 						<ul>
 								<li><div class="col-md-3 product_container"> <img src="http://localhost:8080/onlinecamerashop/public/images/camera.jpg" alt="">
 										<div class="product-name">Cameras</div>
+
 										  <div class="buttons_p">
 										    <button class="btn btn-default">See More</button></div>
 										</div>
@@ -233,21 +212,80 @@ endif;?>
 			</div>
 </div>
 <div class="row">
-	<div  class = "landscape">
 
-		<div class = "landscape_header"> Latest Products
-		  <hr style="float: right; margin-top:15px;">  </div>
-		<div class="pics_box">
-			<div class="pic_box"> <img class="pic_img" src="../../images/lenses.jpg" alt="" /></div><div class = "tiny_separator for_pic"></div>
-			<div class="pic_box"> <img class="pic_img" src="../../images/others.jpg" alt="" /></div><div class = "tiny_separator for_pic"></div>
-			<div class="pic_box"> <img class="pic_img" src="../../images/stand.jpg" alt="" /></div><div class = "tiny_separator for_pic"></div>
-			<div class="pic_box"> <img class="pic_img" src="../../images/cameras.jpg" alt="" /></div>
-		</div>
-		</div>
-	<div class = "landscape_tiny_box"></div><div class = "tiny_separator"></div>
-	<div class = "landscape_tiny_box"></div><div class = "tiny_separator"></div>
-	<div class = "landscape_tiny_box"></div><div class = "tiny_separator"></div>
-	<div class = "landscape_tiny_box"></div>
+
+		<div class = "landscape_header"> Latest Products</div>
+		<div id="latest_products">
+<!--// controls-->
+<a class="btnprev"><span class="glyphicon glyphicon-chevron-left"></span>
+  </a>
+<a class="btnnext"><span class="glyphicon glyphicon-chevron-right"></span>
+  </a>
+
+						<ul>
+								<li><div class="col-md-3 product_container"> <img src="http://localhost:8080/onlinecamerashop/public/images/camera.jpg" alt="">
+										<div class="product-name">Cameras</div>
+										 <div >  12<span> EUR</span>  </div>
+										  <div class="buttons_p">
+										    <button class="btn btn-primary btn-xs">Add To Cart</button></div>
+										</div>
+								</li>
+								<li>	<div class="col-md-3 product_container"> <img src="http://localhost:8080/onlinecamerashop/public/images/lenses.jpg" alt="">
+									<div class="product-name">Lenses</div>
+									  <div >  12<span> EUR</span>  </div>
+										  <div class="buttons_p">
+										    <button class="btn btn-primary btn-xs">Add To Cart</button></div>
+										</div>
+									</li>
+									<li><div class="col-md-3 product_container"> <img  src="http://localhost:8080/onlinecamerashop/public/images/stand.jpg" alt="">
+										<div class="product-name">Tripods</div>
+										  <div >  12<span> EUR</span>  </div>
+										  <div class="buttons_p">
+										    <button class="btn btn-primary btn-xs">Add To Cart</button></div>
+										</div>
+									</li>
+									<li><div class="col-md-3 product_container"> <img  src="http://localhost:8080/onlinecamerashop/public/images/cameras.jpg" alt="">
+										<div class="product-name">Cheap Cameras</div>
+										  <div >  12<span> EUR</span>  </div>
+										  <div class="buttons_p">
+										    <button class="btn btn-primary btn-xs">Add To Cart</button></div>
+										</div>
+									</li>
+
+<!--NExt four-->
+<li><div class="col-md-3 product_container"> <img src="http://localhost:8080/onlinecamerashop/public/images/camera.jpg" alt="">
+										<div class="product-name">Cameras</div>
+										  <div >  12<span> EUR</span>  </div>
+										  <div class="buttons_p">
+										    <button class="btn btn-primary btn-xs">Add To Cart</button></div>
+										</div>
+								</li>
+								<li>	<div class="col-md-3 product_container"> <img src="http://localhost:8080/onlinecamerashop/public/images/lenses.jpg" alt="">
+									<div class="product-name">Lenses</div>
+									  <div >  12<span> EUR</span>  </div>
+										  <div class="buttons_p">
+										    <button class="btn btn-primary btn-xs">Add To Cart</button></div>
+										</div>
+									</li>
+									<li><div class="col-md-3 product_container"> <img  src="http://localhost:8080/onlinecamerashop/public/images/stand.jpg" alt="">
+										<div class="product-name">Tripods</div>
+										  <div >  12<span> EUR</span>  </div>
+										  <div class="buttons_p">
+										    <button class="btn btn-primary btn-xs">Add To Cart</button></div>
+										</div>
+									</li>
+									<li><div class="col-md-3 product_container"> <img  src="http://localhost:8080/onlinecamerashop/public/images/cameras.jpg" alt="">
+										<div class="product-name">Cheap Cameras</div>
+										  <div >  12<span> EUR</span>  </div>
+										  <div class="buttons_p">
+										    <button class="btn btn-primary btn-xs">Add To Cart</button></div>
+										</div>
+									</li>
+
+
+
+							</ul>
+			</div>
 </div>
 <div class="row">
 	<div class = "landscape">
