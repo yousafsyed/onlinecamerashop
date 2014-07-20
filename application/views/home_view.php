@@ -132,13 +132,13 @@ endif;?>
 <div class="container">
 
 
-<!-- <div class="row">
+<div class="row">
 	<div class = "landscape" style="background-color: #0b0000;"></div>
 	<div class = "landscape_tiny_box" ></div><div class = "tiny_separator"></div>
 	<div class = "landscape_tiny_box"></div><div class = "tiny_separator"></div>
 	<div class = "landscape_tiny_box"></div><div class = "tiny_separator"></div>
 	<div class = "landscape_tiny_box"></div>
-</div> -->
+</div>
 <div class="row">
 
 	   <div class="landscape_header col-6">Categories</div>
