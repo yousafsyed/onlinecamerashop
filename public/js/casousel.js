@@ -7,15 +7,16 @@
 		var maximum = $("#"+currentItemId+' ul li').size();
 		var visible = 4;
 		var speed = 200;
-		var liSize = 250;
+		var liSize = 255;
 		var carousel_height = 300;
+		var ulSize = (liSize) * maximum;
+		var divSize = (liSize) * visible -20;
 
 		$("#"+currentItemId+" ul").css('list-style','none').css('padding','0');
 		$("#"+currentItemId+' .btnprev').css('position', 'absolute').css('top', '50%').css('z-index', '23');
 		$("#"+currentItemId+' .btnnext').css('position', 'absolute').css('top', '50%').css('z-index', '23').css('left','97%');
 
-		var ulSize = (liSize)*maximum;
-		var divSize = (liSize) * visible;
+	
 
 		$("#"+currentItemId+' ul').css("width", ulSize+"px").css("left", -(current * liSize)).css("position", "absolute");
 

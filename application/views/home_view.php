@@ -287,27 +287,7 @@ endif;?>
 							</ul>
 			</div>
 </div>
-<div class="row">
-	<div class = "landscape">
 
-		<div class = "landscape_header"> Latest Blog
-		  <hr style="float: right; margin-top:15px;">  </div>
-
-		<div class="pics_box">
-			<div class="pic_box"> <img class="pic_img" src="" alt="" /> </div><div class = "tiny_separator for_pic"></div>
-			<div class="pic_box"> <img class="pic_img" src="" alt="" /></div><div class = "tiny_separator for_pic"></div>
-			<div class="pic_box"> <img class="pic_img" src="" alt="" /></div><div class = "tiny_separator for_pic"></div>
-			<div class="pic_box"> <img class="pic_img" src="" alt="" /></div>
-		</div>
-		</div>
-
-
-	<div class = "landscape_tiny_box"></div><div class = "tiny_separator"></div>
-	<div class = "landscape_tiny_box"></div><div class = "tiny_separator"></div>
-	<div class = "landscape_tiny_box"></div><div class = "tiny_separator"></div>
-	<div class = "landscape_tiny_box"></div>
-
-	</div>
 
 </div>
 </body>
