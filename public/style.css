@@ -148,12 +148,13 @@ nav.mainNav ul li a:hover {
 	}
 	.landscape_header
 	{
-		height:35px;
-		width:100%;
+		
 		text-align:center;
 		line-height:35px;
 		background-color:#8f9897;
 		border-radius: 3px;
+		margin-bottom: 20px;
+		margin-top: 20px;
 	}
 	hr
 	{
@@ -185,5 +186,40 @@ nav.mainNav ul li a:hover {
 		float:left;
 	}
 	.container {
+		width: 1000px;
     margin-top: 73px;
+}
+.product_container{
+	background: #DCDBDB;
+	padding: 0;
+	width: 230px;
+	margin-right: 20px;
+	text-align: center;
+	height: 300px;
+	box-shadow: 0px 0px 3px #887F7F;
+
+}
+
+.product_container img{
+
+	width: 230px;
+	
+
+}
+.buttons_p {
+margin-top: 14px;
+}
+.product-name {
+white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
+height: 17px;
+margin-top: 5px;
+font-size: 15px;
+font-weight: bold;
+}
+#my_carousel ul{
+	list-style: none;
+	padding:0;
+	margin:0;
 }
