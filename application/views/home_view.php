@@ -11,7 +11,34 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
 <script>
+// trigger load event
+$(window).load(function() {
+	// load all categories
+		$.ajax({
+			 url :"<?php echo base_url('index.php/categories/all')?>",
+            type:"POST",
+            data:$("#login_form").serialize(),
+            dataType:"json",
+            success:function(data){
+            	if(typeof(data.error) == 'undefined') {
+
+					var categoriesData = '<a class="btnprev"><span class="glyphicon glyphicon-chevron-left"></span></a><a class="btnnext"><span class="glyphicon glyphicon-chevron-right"></span></a><ul style="display:none">';
+								$.each(data, function( index, value ) {
+								  	categoriesData += '<li><div class="col-md-3 product_container"> <img src="<?php base_url()?>public/images/categories/'+value.c_id+'/image.jpg" alt="'+value.c_name+'"><div class="product-name">'+value.c_name+'</div><div class="buttons_p"><button class="btn btn-default">See More</button></div></div></li>';
+								});
+								categoriesData += '</ul>';
+
+							$('#categories').html(categoriesData);
+							$('#categories').trigger('categoriesloaded');
+
+            	}
+            }
+		});
+	// load all categories
+});
+
 $(document).ready(function(){
+
     // login user
     $("#login_btn").click(function(e){
     	$("#login_btn").attr('disabled','disabled');
@@ -40,8 +67,12 @@ $(document).ready(function(){
 
     });// login function ends
 
+$('#categories').on('categoriesloaded',function(){
 
-$('#categories').casrousel();
+	$('#categories').casrousel();
+	$('#categories ul').fadeIn(500);
+});
+
 $('#latest_products').casrousel({
 	 		step: 5,
             visible:5,
@@ -151,72 +182,9 @@ endif;?>
 
 	   <div class="landscape_header col-6">Categories</div>
 			<div id="categories">
-<!--// controls-->
-<a class="btnprev"><span class="glyphicon glyphicon-chevron-left"></span>
-  </a>
-<a class="btnnext"><span class="glyphicon glyphicon-chevron-right"></span>
-  </a>
 
-						<ul>
-								<li><div class="col-md-3 product_container"> <img src="http://localhost:8080/onlinecamerashop/public/images/camera.jpg" alt="">
-										<div class="product-name">Cameras</div>
+				<img class="loader" src="<?=base_url('public/images/loader.gif')?>">
 
-										  <div class="buttons_p">
-										    <button class="btn btn-default">See More</button></div>
-										</div>
-								</li>
-								<li>	<div class="col-md-3 product_container"> <img src="http://localhost:8080/onlinecamerashop/public/images/lenses.jpg" alt="">
-									<div class="product-name">Lenses</div>
-									  <div class="buttons_p">
-									    <button class="btn btn-default">See More</button></div>
-
-
-									</div>
-									</li>
-									<li><div class="col-md-3 product_container"> <img  src="http://localhost:8080/onlinecamerashop/public/images/stand.jpg" alt="">
-										<div class="product-name">Tripods</div>
-										  <div class="buttons_p">
-										    <button class="btn btn-default">See More</button></div>
-									</div>
-									</li>
-									<li><div class="col-md-3 product_container"> <img  src="http://localhost:8080/onlinecamerashop/public/images/cameras.jpg" alt="">
-										<div class="product-name">Cheap Cameras</div>
-										  <div class="buttons_p">
-										    <button class="btn btn-default">See More</button></div>
-									</div>
-									</li>
-
-<!--NExt four-->
-<li><div class="col-md-3 product_container"> <img src="http://localhost:8080/onlinecamerashop/public/images/camera.jpg" alt="">
-										<div class="product-name">Cameras</div>
-										  <div class="buttons_p">
-										    <button class="btn btn-default">See More</button></div>
-										</div>
-								</li>
-								<li>	<div class="col-md-3 product_container"> <img src="http://localhost:8080/onlinecamerashop/public/images/lenses.jpg" alt="">
-									<div class="product-name">Lenses</div>
-									  <div class="buttons_p">
-									    <button class="btn btn-default">See More</button></div>
-
-
-									</div>
-									</li>
-									<li><div class="col-md-3 product_container"> <img  src="http://localhost:8080/onlinecamerashop/public/images/stand.jpg" alt="">
-										<div class="product-name">Tripods</div>
-										  <div class="buttons_p">
-										    <button class="btn btn-default">See More</button></div>
-									</div>
-									</li>
-									<li><div class="col-md-3 product_container"> <img  src="http://localhost:8080/onlinecamerashop/public/images/cameras.jpg" alt="">
-										<div class="product-name">Cheap Cameras</div>
-										  <div class="buttons_p">
-										    <button class="btn btn-default">See More</button></div>
-									</div>
-									</li>
-
-
-
-							</ul>
 			</div>
 </div>
 <div class="row">

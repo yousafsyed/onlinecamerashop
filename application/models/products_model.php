@@ -8,7 +8,7 @@ class Products_model extends CI_Model {
 		$this->db->select('*');
 		$query = $this->db->get('onlinecamerashop_categories');
 		if ($query->num_rows() > 0) {
-			return $query->row_array();
+			return $query->result_array();
 		} else {
 			return false;
 		}
@@ -16,11 +16,12 @@ class Products_model extends CI_Model {
 
 	function get_latest_products($limit = 20) {
 		$this->db->select('*');
+		$this->db->order_by('date_added');
 		$this->db->limit($limit);
-		$this->db->order('date_added', 'asc');
 		$query = $this->db->get('onlinecamerashop_products');
+
 		if ($query->num_rows() > 0) {
-			return $query->row_array();
+			return $query->result_array();
 		} else {
 			return false;
 		}

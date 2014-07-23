@@ -241,3 +241,12 @@ font-weight: bold;
 	
 
 }
+
+.loader {
+ 
+width: 30px;
+margin: auto;
+margin-left: 50%;
+left: -15;
+position: relative;
+}
