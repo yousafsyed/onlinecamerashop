@@ -42,7 +42,15 @@ $(document).ready(function(){
 
 
 $('#categories').casrousel();
-$('#latest_products').casrousel();
+$('#latest_products').casrousel({
+	 		step: 5,
+            visible:5,
+            speed:200,
+            liSize:184,
+            margin: 20,
+            carousel_height:250,
+            current:0
+});
 $("#message").on('hide_error_message',function(){
 	setTimeout(function(){
 		$("#message").slideUp();
