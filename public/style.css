@@ -200,9 +200,10 @@ nav.mainNav ul li a:hover {
 
 }
 
-.product_container img{
+#categories .product_container img{
 
 	width: 235px;
+	height: 221px;
 	
 
 }

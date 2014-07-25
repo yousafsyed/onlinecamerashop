@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 25, 2014 at 05:38 PM
+-- Generation Time: Jul 25, 2014 at 06:51 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -19,6 +19,20 @@ SET time_zone = "+00:00";
 --
 -- Database: `onlinecamerashop`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `onlinecamerashop_cart`
+--
+
+CREATE TABLE IF NOT EXISTS `onlinecamerashop_cart` (
+  `user_id` int(11) NOT NULL,
+  `p_id` int(11) NOT NULL,
+  `c_id` int(11) NOT NULL,
+  `cart_id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`cart_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -58,17 +72,19 @@ CREATE TABLE IF NOT EXISTS `onlinecamerashop_products` (
   `p_price` varchar(20) NOT NULL,
   `p_quantity` varchar(100) NOT NULL,
   `p_description` text NOT NULL,
+  `color` text NOT NULL,
   `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`p_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `onlinecamerashop_products`
 --
 
-INSERT INTO `onlinecamerashop_products` (`p_id`, `c_id`, `p_name`, `p_price`, `p_quantity`, `p_description`, `date_added`) VALUES
-(1, 1, 'Camera DSLR', '200', '45', 'camera is awesome', '2014-07-22 23:00:00'),
-(2, 2, 'Camera DSLR2', '121', '200', 'this is awesome cheap camera', '2014-07-23 13:38:45');
+INSERT INTO `onlinecamerashop_products` (`p_id`, `c_id`, `p_name`, `p_price`, `p_quantity`, `p_description`, `color`, `date_added`) VALUES
+(1, 1, 'Camera DSLR', '200', '45', 'camera is awesome', '', '2014-07-22 23:00:00'),
+(2, 2, 'Camera DSLR2', '121', '200', 'this is awesome cheap camera', '', '2014-07-23 13:38:45'),
+(3, 1, 'Tripod for camera', '200', '200', 'This is description', 'black,white', '2014-07-25 16:16:05');
 
 -- --------------------------------------------------------
 
