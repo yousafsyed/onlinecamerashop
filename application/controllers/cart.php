@@ -57,6 +57,32 @@ class Cart extends CI_Controller {
 
 		} else {// save the cart in database
 
+			// add to cart
+			$p_id  = $this->input->post('p_id');
+			$qty   = $this->input->post('qty');
+			$color = $this->input->post('color');
+			if (empty($qty)) {
+				$qty = 1;
+			}
+
+			$product_info = $this->products_model->getProductById($p_id);
+			if (empty($color)) {
+				$color = $product_info['color'];
+				$color = explode(',', $color);
+				$color = $color[0];
+			}
+			$data = array(
+				'id'      => $p_id,
+				'qty'     => $qty,
+				'price'   => $product_info['p_price'],
+				'name'    => $product_info['p_name'],
+				'options' => array('Color' => $color)
+			);
+
+			$this->cart->insert($data);
+
+			// add the product id(p_id) and (user_id) to database
+
 		}
 	}
 }
