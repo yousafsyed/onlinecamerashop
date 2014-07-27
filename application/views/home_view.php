@@ -71,7 +71,7 @@ $(window).load(function() {
 						            		 	url = '<?=base_url()?>public/images/products/'+value.p_id+'/image.jpg';
 						            		 }
 
-									  	latestproductsData += '<li><div class="col-md-3 product_container"> <img src="'+url+'" alt="'+value.p_name+'"><div class="product-name">'+value.p_name+'</div><div>'+value.p_price+'<span> EUR</span></div><div class="buttons_p"><button class="btn btn-primary btn-xs">Add To Cart</button></div></div></div></li>';
+									  	latestproductsData += '<li data-pid= "'+value.p_id+'"><div class="col-md-3 product_container"> <img src="'+url+'" alt="'+value.p_name+'"><div class="product-name">'+value.p_name+'</div><div>'+value.p_price+'<span> EUR</span></div><div class="buttons_p"><button class="addtocart btn btn-primary btn-xs">Add To Cart</button></div></div></div></li>';
 									});
 									latestproductsData += '</ul>';
 
@@ -105,9 +105,11 @@ $(document).ready(function(){
                         window.location = "<?php echo base_url('index.php/home')?>"
                     },500);
                 }else{
+                   $("#message").addClass('alert-danger');
+                	$("#message").removeClass('alert-success');
                     $("#message").slideDown();
                     $("#message .messageclass").text(data.error);
-                    $("#message").trigger('hide_error_message');
+                    $("#message").trigger('hide_message');
                 }
             }
 
@@ -134,11 +136,49 @@ $('#latest_products').on('latestproductsLoaded',function(){
 
 });
 
-$("#message").on('hide_error_message',function(){
+$("#message").on('hide_message',function(){
 	setTimeout(function(){
 		$("#message").slideUp();
 	},2000);
 });
+// add item to cart
+$(document).on('click','.addtocart',function(){
+	var self = $(this);
+	var pid = self.parents('li').data('pid');
+	self.attr('disabled','disabled');
+	self.text('Processing...');
+
+
+	$.ajax({
+            url :"<?php echo base_url('index.php/cart/add')?>",
+            type:"POST",
+           	data:{"pid":pid},
+            dataType:"json",
+            success:function(data){
+            	self.removeAttr('disabled');
+            	self.text('Add To Cart');
+                if(typeof(data.error) == "undefined"){
+                	$("#message").removeClass('alert-danger');
+                	$("#message").addClass('alert-success');
+                	$("#message").slideDown();
+                    $("#message .messageclass").text(data.success);
+                    $("#message").trigger('hide_message');
+                }else{
+                	$("#message").addClass('alert-danger');
+                	$("#message").removeClass('alert-success');
+                    $("#message").slideDown();
+                    $("#message .messageclass").text(data.error);
+                    $("#message").trigger('hide_message');
+                }
+            }
+
+        });
+
+
+});
+
+// add item to cart ends
+
 
 });// document ready ends
 </script>
