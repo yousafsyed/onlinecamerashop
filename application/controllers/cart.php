@@ -10,6 +10,7 @@ class Cart extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->helper('form');
 		$this->load->library("session");
+
 	}
 	public function index() {
 		$email = $this->session->userdata('email');
@@ -194,6 +195,56 @@ class Cart extends CI_Controller {
 				echo json_encode(array('error' => 'Something went wrong while adding the item to cart database'));
 			}
 
+		}
+
+	}
+
+	public function checkout() {
+		if ($this->cart->total_items() > 0) {
+			$items                        = $this->cart->contents();
+			$config["first_name"]         = 'yousaf';
+			$config['business']           = 'mmesunny-facilitator@gmail.com';
+			$config['cpp_header_image']   = '';// Image header url [750 pixels wide by 90 pixels high]
+			$config['return']             = base_url().'index.php/cart/ipn';
+			$config['cancel_return']      = base_url().'index.php/cart/payment_rejected';
+			$config['notify_url']         = base_url().'index.php/cart/ipn';//IPN Post
+			$config['production']         = false;//Its false by default and will use sandbox
+			$config['discount_rate_cart'] = 0;//This means 20% discount
+			$config['mc_handling']        = '20';
+			$config['mc_shipping']        = '20';
+			$this->load->library('paypal', $config);
+			foreach ($items as $key => $item) {
+				//print_r($item);
+				$this->paypal->add($item['name'], $item['subtotal']);
+			}
+
+			$payment_url = $this->paypal->pay();//Proccess the payment
+			header("Location:".$payment_url);
+		}
+
+	}
+	public function ipn() {
+
+		$this->load->library('PayPal_IPN');// Load the library
+
+		// Try to get the IPN data.
+		if ($this->paypal_ipn->validateIPN()) {
+			// Succeeded, now let's extract the order
+			$this->paypal_ipn->extractOrder();
+
+			// And we save the order now (persist and extract are separate because you might only want to persist the order in certain circumstances).
+			$this->paypal_ipn->saveOrder();
+
+			// Now let's check what the payment status is and act accordingly
+			if ($this->paypal_ipn->orderStatus == PayPal_IPN::PAID) {
+				echo "success";
+			}
+		} else {
+			// Just redirect to the root URL
+			{
+				$this->load->helper('url');
+				redirect('/', 'refresh');
+			}
 		}
 
 	}

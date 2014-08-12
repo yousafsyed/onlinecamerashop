@@ -164,10 +164,10 @@ endif;?>
 	 <strong><?php echo $option_name;
 ?>:</strong>
 	<br />
-	<select name="<?=$i.'[color]'?>">
-	  <option value="<?php echo $option_value;
-?>"><?php echo $option_value;
-?></option>
+
+
+<?php echo $option_value;
+?>
 <?php if (count($this->session->userdata($items['rowid'])) > 0 && !empty($this->session->userdata($items['rowid']))):?>
     <?php foreach ($this->session->userdata($items['rowid']) as $colors):?>
 <option value="<?=$colors?>"><?=$colors?></option>
@@ -199,7 +199,8 @@ endif;?>
 	</table>
 
 	<p><button class="btn btn-primary"> Update Cart</button></p>
-
+<?=form_close();?>
+  <p><button class="btn btn-default"> Checkout</button></p>
 
 	</div>
 	</div>
