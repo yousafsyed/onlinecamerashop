@@ -210,8 +210,7 @@ class Cart extends CI_Controller {
 			$config['notify_url']         = base_url().'index.php/cart/ipn';//IPN Post
 			$config['production']         = false;//Its false by default and will use sandbox
 			$config['discount_rate_cart'] = 0;//This means 20% discount
-			$config['mc_handling']        = '20';
-			$config['mc_shipping']        = '20';
+			$config['shipping']           = 20;
 			$this->load->library('paypal', $config);
 			foreach ($items as $key => $item) {
 				//print_r($item);
@@ -231,13 +230,16 @@ class Cart extends CI_Controller {
 		if ($this->paypal_ipn->validateIPN()) {
 			// Succeeded, now let's extract the order
 			$this->paypal_ipn->extractOrder();
-
+			$email = $this->session->userdata('email');
 			// And we save the order now (persist and extract are separate because you might only want to persist the order in certain circumstances).
-			$this->paypal_ipn->saveOrder();
+			$user_info = $this->users_model->get_user_by_email($email);
+			$this->paypal_ipn->saveOrder($user_info['user_id']);
 
 			// Now let's check what the payment status is and act accordingly
 			if ($this->paypal_ipn->orderStatus == PayPal_IPN::PAID) {
-				echo "success";
+				$data          = $this->paypal_ipn->order;
+				$data['items'] = $this->paypal_ipn->orderItems;
+				$this->load->view('payment_success_view', $data);
 			}
 		} else {
 			// Just redirect to the root URL

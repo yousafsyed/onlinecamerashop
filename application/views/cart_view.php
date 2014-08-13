@@ -49,6 +49,12 @@ $("#message").on('hide_error_message',function(){
 	},2000);
 });
 
+$(".checkout").click(function(){
+
+          $(this).toggleClass('active');
+
+});
+
 });// document ready ends
 </script>
 </head>
@@ -200,7 +206,13 @@ endif;?>
 
 	<p><button class="btn btn-primary"> Update Cart</button></p>
 <?=form_close();?>
-  <p><button class="btn btn-default"> Checkout</button></p>
+  <p><a href="<?=base_url('index.php/cart/checkout')?>" class="btn btn-default has-spinner checkout">
+
+    <span class="spinner"><i class="glyphicon glyphicon-refresh"></i></span>
+    Checkout
+
+
+   </a></p>
 
 	</div>
 	</div>

@@ -399,9 +399,9 @@ class PayPal_IPN {
 	// Note is that an order may already exist in the system, and this IPN
 	// call is just to update the record - e.g. changing its payment status.
 	// CI ActiveRecord version
-	public function saveOrder() {
+	public function saveOrder($user_id) {
 		// Save the order
-		$this->_ci->IPNOrder->saveOrder($this->order, $this->orderItems, $this->ipnData['txn_id']);
+		$this->_ci->IPNOrder->saveOrder($this->order, $this->orderItems, $this->ipnData['txn_id'], $user_id);
 	}
 
 	// The transaction logger. Currently tracks:

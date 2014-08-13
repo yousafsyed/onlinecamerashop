@@ -11,7 +11,7 @@ class Ipn_order_model extends CI_Model {
 	}
 
 	// Save the order, performing an insert or update as appropriate
-	function saveOrder($order, $orderItems, $transactionID) {
+	function saveOrder($order, $orderItems, $transactionID, $user_id) {
 		// Define the transaction query once
 		$orderQuery = array('txn_id' => $transactionID);
 
@@ -30,6 +30,7 @@ class Ipn_order_model extends CI_Model {
 		// Else do an insert and then get the ID
 		else{
 			$order['created_at'] = $upsertTime;// A new order needs a created_at time too
+			$order['user_id']    = $user_id;
 			$this->db->insert(self::ORDER_TABLE, $order);
 			$orderID = $this->db->insert_id();
 		}

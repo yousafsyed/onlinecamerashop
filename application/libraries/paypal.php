@@ -54,14 +54,6 @@ class Paypal {
 		$config["rm"]            = '2';//Leave this to get payment information
 		$config["lc"]            = 'EN';//Languaje [EN,ES]
 
-		#Shipping and Misc Information -->
-		$config["shipping"]             = '20';
-		$config["shipping2"]            = '';
-		$config["handling"]             = '20';
-		$config["tax"]                  = '';
-		$config["discount_amount_cart"] = '';//Discount amount [9.99]
-		$config["discount_rate_cart"]   = '';//Discount percentage [15]
-
 		#Customer Information -->
 		$config["first_name"]    = '';
 		$config["last_name"]     = '';
@@ -116,11 +108,14 @@ class Paypal {
 	 * @param	array
 	 * @return	void
 	 */
-	function add($item_name = '', $item_amount = NULL, $item_qty = NULL, $item_number = NULL) {
+	function add($item_name = '', $item_amount = NULL, $item_qty = NULL, $item_number = NULL, $shipping = NULL, $shipping2 = NULL, $handling = NULL) {
 		$this->config['item_name_'.$this->item]   = $item_name;
 		$this->config['amount_'.$this->item]      = $item_amount;
 		$this->config['quantity_'.$this->item]    = $item_qty;
 		$this->config['item_number_'.$this->item] = $item_number;
+		$this->config['shipping_'.$this->item]    = 20;
+		$this->config['shipping2_'.$this->item]   = 10;
+		$this->config['handling_'.$this->item]    = 0;
 		$this->item++;
 	}
 }
