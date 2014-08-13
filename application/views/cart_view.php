@@ -211,7 +211,7 @@ endif;?>
     <span class="spinner"><i class="glyphicon glyphicon-refresh"></i></span>
     Checkout
 
-
+<img alt="buy now with PayPal" border="0" src="https://www.paypalobjects.com/webstatic/en_US/btn/btn_buynow_pp_142x27.png" />
    </a></p>
 
 	</div>

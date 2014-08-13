@@ -208,6 +208,7 @@ class Cart extends CI_Controller {
 			$config['return']             = base_url().'index.php/cart/ipn';
 			$config['cancel_return']      = base_url().'index.php/cart/payment_rejected';
 			$config['notify_url']         = base_url().'index.php/cart/ipn';//IPN Post
+			$config['notification_url']   = base_url().'index.php/cart/ipn';//IPN Post
 			$config['production']         = false;//Its false by default and will use sandbox
 			$config['discount_rate_cart'] = 0;//This means 20% discount
 			$config['shipping']           = 20;
