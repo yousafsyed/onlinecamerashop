@@ -62,4 +62,16 @@ class Ipn_order_model extends CI_Model {
 			}
 		}
 	}
+
+	function getOrders($user_id) {
+		$this->db->where('user_id', $user_id);
+		$this->db->order_by('created_at', 'desc');
+		$query = $this->db->get(self::ORDER_TABLE);
+		if ($query->num_rows > 0) {
+			return $query->result_array();
+		} else {
+			return false;
+		}
+
+	}
 }

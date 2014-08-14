@@ -122,10 +122,9 @@ else:?>
 			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $user_name
 ?><span class="caret"></span></a>
 	<ul class="dropdown-menu" role="menu">
-			<li><a href="#">Action</a></li>
-			<li><a href="#">Another action</a></li>
-			<li><a href="#">Something else here</a></li>
-			<li class="divider"></li>
+			<li><a href="<?=base_url('index.php/home/orders');?>">My Orders</a></li>
+			<li><a href="#">Account</a></li>
+  		<li class="divider"></li>
 			<li><a href="<?php echo base_url('index.php/home/logout')?>">Logout</a></li>
 		</ul>
 		</li>

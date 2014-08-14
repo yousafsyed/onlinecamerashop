@@ -1,5 +1,6 @@
 <?php
-	if (!defined('BASEPATH')) {exit('No direct script access allowed');
+	if (!defined('BASEPATH')) {
+		exit('No direct script access allowed');
 	}
 
 	require_once (APPPATH."libraries/smscenterdotpk.php");
@@ -14,13 +15,13 @@
 			$this->load->library('email');
 			$this->load->helper('url');
 			$this->load->library("session");
-
 		}
 
 		public function index() {
 			$email = $this->session->userdata('email');
 			$data  = array();
 			if (!empty($email)) {
+
 				// get user data
 				$userdata = $this->users_model->get_user_by_email($email);
 
@@ -28,11 +29,11 @@
 				$data['user_name'] = $userdata['user_name'];
 				$data['logged_in'] = true;
 			} else {
+
 				//not logged it
 				$data['user_name'] = 'Guest';
 				$data['email']     = 'Guest';
 				$data['logged_in'] = false;
-
 			}
 			$this->load->view('home_view', $data);
 		}
@@ -66,6 +67,7 @@
 			if ($login) {
 				$session_data = array("email" => $email);
 				$this->session->set_userdata($session_data);
+
 				// get the data of user from cart table
 				$userdata        = $this->users_model->get_user_by_email($email);
 				$user_id         = $userdata['user_id'];
@@ -73,13 +75,7 @@
 				if (is_array($user_cart_items)) {
 					foreach ($user_cart_items as $key => $item) {
 						$current_product_info = $this->products_model->getProductById($item['p_id']);
-						$data                 = array(
-							'id'      => $item['p_id'],
-							'qty'     => $item['qty'],
-							'price'   => $current_product_info['p_price'],
-							'name'    => $current_product_info['p_name'],
-							'options' => array('Color' => $item['color'])
-						);
+						$data                 = array('id' => $item['p_id'], 'qty' => $item['qty'], 'price' => $current_product_info['p_price'], 'name' => $current_product_info['p_name'], 'options' => array('Color' => $item['color']));
 
 						$this->cart->insert($data);
 					}
@@ -142,13 +138,13 @@
 					$to      = $email;
 					$subject = "Welcome to OnlineCameraShop:: Please confirm your email";
 					$message = "
-							Hi $usernameYouraccounthasbeencreatedsuccessfully
+										Hi $usernameYouraccounthasbeencreatedsuccessfully
 	" .base_url('index.php/home/confirmEmail?code='.$email_confirmation_code)."
 
-							Regards
-							ShopName
+										Regards
+										ShopName
 
-							                ";
+										                ";
 
 					// $this->send_email($to, $subject, $message);
 
@@ -205,6 +201,28 @@
 			}
 		}
 
+		public function orders() {
+			$email = $this->session->userdata('email');
+			if (!empty($email)) {
+				$userdata = $this->users_model->get_user_by_email($email);
+				$this->load->model('ipn_order_model');
+				$orders = $this->ipn_order_model->getOrders($userdata['user_id']);
+
+				// get user data
+				$userdata = $this->users_model->get_user_by_email($email);
+
+				$data['email']     = $email;
+				$data['user_name'] = $userdata['user_name'];
+				$data['logged_in'] = true;
+				$data['orders']    = $orders;
+
+				$this->load->view('orders_view', $data);
+			} else {
+
+				redirect('/', 'refresh');
+			}
+		}
+
 		public function logout() {
 			$this->session->sess_destroy();
 			header("Location:".base_url());
@@ -212,7 +230,8 @@
 
 		// protected and private functions
 		private function is_valid_mobile_number($telNumber) {
-			if (!is_string($telNumber) && !is_int($telNumber)) {return false;
+			if (!is_string($telNumber) && !is_int($telNumber)) {
+				return false;
 			}
 
 			/* All regex patterns written by Sag-e-Attar Junaid Atari */
