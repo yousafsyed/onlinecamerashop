@@ -29,13 +29,14 @@ class Products_model extends CI_Model {
 	function getProductById($id) {
 		$this->db->select('*');
 		$this->db->where('p_id', $id);
-
+		$this->db->join('onlinecamerashop_brand', 'onlinecamerashop_brand.b_id = onlinecamerashop_products.b_id', 'left');
+		$this->db->join('onlinecamerashop_categories', 'onlinecamerashop_categories.c_id = onlinecamerashop_products.c_id', 'left');
 		$query = $this->db->get('onlinecamerashop_products');
 
 		if ($query->num_rows() > 0) {
 			return $query->row_array();
 		} else {
-			return false;
+			return null;
 		}
 	}
 }

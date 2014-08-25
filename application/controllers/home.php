@@ -72,14 +72,6 @@
 				$userdata        = $this->users_model->get_user_by_email($email);
 				$user_id         = $userdata['user_id'];
 				$user_cart_items = $this->cart_model->getUserCartItems($user_id);
-				if (is_array($user_cart_items)) {
-					foreach ($user_cart_items as $key => $item) {
-						$current_product_info = $this->products_model->getProductById($item['p_id']);
-						$data                 = array('id' => $item['p_id'], 'qty' => $item['qty'], 'price' => $current_product_info['p_price'], 'name' => $current_product_info['p_name'], 'options' => array('Color' => $item['color']));
-
-						$this->cart->insert($data);
-					}
-				}
 
 				echo json_encode(array("success" => "Logged in successfully"));
 			} else {
@@ -138,13 +130,13 @@
 					$to      = $email;
 					$subject = "Welcome to OnlineCameraShop:: Please confirm your email";
 					$message = "
-										Hi $usernameYouraccounthasbeencreatedsuccessfully
+											Hi $usernameYouraccounthasbeencreatedsuccessfully
 	" .base_url('index.php/home/confirmEmail?code='.$email_confirmation_code)."
 
-										Regards
-										ShopName
+											Regards
+											ShopName
 
-										                ";
+											                ";
 
 					// $this->send_email($to, $subject, $message);
 

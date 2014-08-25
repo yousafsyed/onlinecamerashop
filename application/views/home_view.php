@@ -71,7 +71,7 @@ $(window).load(function() {
 						            		 	url = '<?=base_url()?>public/images/products/'+value.p_id+'/image.jpg';
 						            		 }
 
-									  	latestproductsData += '<li data-pid= "'+value.p_id+'"><div class="col-md-3 product_container"> <img src="'+url+'" alt="'+value.p_name+'"><div class="product-name">'+value.p_name+'</div><div>'+value.p_price+'<span> EUR</span></div><div class="buttons_p"><button class="addtocart btn btn-primary btn-xs">Add To Cart</button></div></div></div></li>';
+									  	latestproductsData += '<li data-pid= "'+value.p_id+'"><div class="col-md-3 product_container"> <img src="'+url+'" alt="'+value.p_name+'"><div class="product-name"><a href="<?=base_url("index.php/item")?>/'+value.p_id+'">'+value.p_name+'</div><div>'+value.p_price+'<span> EUR</span></div><div class="buttons_p"><button class="addtocart btn btn-primary btn-xs">Add To Cart</button></div></div></div></li>';
 									});
 									latestproductsData += '</ul>';
 

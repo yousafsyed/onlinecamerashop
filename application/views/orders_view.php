@@ -90,15 +90,16 @@ z-index: 10000" class="alert alert-danger fade in" role="alert">
 			<th>Total Items #</th>
 			<th>Dispatched Status</th>
 			<th>Created On</th>
+			<th>Actions</th>
 		</tr>
 	</thead>
 	<tbody>
 <?php foreach ($orders as $key => $order) {?>
-													 <tr>
-													 	<td><?=$order['id']?></td>
-													 	<td><?=$order['txn_id']?></td>
-													 	<td>Paypal</td>
-													 	<td><?php
+																			 <tr>
+																			 	<td><?=$order['id']?></td>
+																			 	<td><?=$order['txn_id']?></td>
+																			 	<td>Paypal</td>
+																			 	<td><?php
 
 	if ($order['order_status'] == 'PAID') {
 		echo '<span class="label label-success">'.$order['order_status'].'</span>';
@@ -107,9 +108,9 @@ z-index: 10000" class="alert alert-danger fade in" role="alert">
 	}
 
 	?></td>
-													 	<td><?=$order['mc_gross']?></td>
-													 	<td><?=$order['num_cart_items']?></td>
-													 	<td>
+																			 	<td><?=$order['mc_gross']?></td>
+																			 	<td><?=$order['num_cart_items']?></td>
+																			 	<td>
 	<?php
 	if ($order['dispatched_status'] == '1') {
 		echo '<span class="label label-success">Yes</span>';
@@ -120,9 +121,12 @@ z-index: 10000" class="alert alert-danger fade in" role="alert">
 	?>
 
 
-													 	</td>
-													 	<td><?=$order['created_at']?></td>
-													 </tr>
+								</td>
+									<td><?=$order['created_at']?></td>
+									<td style="text-align:center">
+									 	<a href="<?=base_url('index.php/home/viewOrder/'.$order['id'])?>" class="button button-default"><span class="glyphicon glyphicon-print"></span></a>
+									</td>
+								</tr>
 	<?php }?>
 	</tbody>
 

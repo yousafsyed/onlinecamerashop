@@ -37,73 +37,36 @@ class Cart extends CI_Controller {
 		$qty          = $this->input->post('qty');
 		$color        = $this->input->post('color');
 		$product_info = $this->products_model->getProductById($p_id);
-		if (empty($email)) {// user is not logged in than just save the data in session
+		//print_r($product_info);
 
-			if (empty($qty)) {
-				$qty = 1;
-			}
-
-			if (empty($color)) {
-				$color = $product_info['color'];
-				$color = explode(',', $color);
-				$color = $color[0];
-			}
-			$available_colors  = explode(',', $product_info['color']);
-			$current_color_key = array_search($color, $available_colors);
-			unset($available_colors[$current_color_key]);
-			$data = array(
-				'id'      => $p_id,
-				'qty'     => $qty,
-				'price'   => $product_info['p_price'],
-				'name'    => $product_info['p_name'],
-				'options' => array('Color' => $color)
-			);
-
-			if ($insert_id = $this->cart->insert($data)) {
-				$sessiondata = array($insert_id => $available_colors);
-				$this->session->set_userdata($sessiondata);
-				echo json_encode(array('success' => 'Item Added to cart Successfully'));
-			} else {
-				echo json_encode(array('error' => 'Something went wrong while adding the item to cart session'));
-			}
-
-		} else {// save the cart in database
-			$userdata = $this->users_model->get_user_by_email($email);
-			$user_id  = $userdata['user_id'];
-			if (empty($qty)) {
-				$qty = 1;
-			}
-			if (empty($color)) {
-				$color = $product_info['color'];
-				$color = explode(',', $color);
-				$color = $color[0];
-			}
-			$available_colors  = explode(',', $product_info['color']);
-			$current_color_key = array_search($color, $available_colors);
-			unset($available_colors[$current_color_key]);
-
-			// add the product id(p_id) and (user_id) to database
-			if ($this->cart_model->addtocart($user_id, $p_id, $qty, $product_info['c_id'], $color)) {
-
-				$data = array(
-					'id'      => $p_id,
-					'qty'     => $qty,
-					'price'   => $product_info['p_price'],
-					'name'    => $product_info['p_name'],
-					'options' => array('Color' => $color)
-				);
-
-				if ($this->cart->insert($data)) {
-					echo json_encode(array('success' => 'Item Added to cart Successfully'));
-				} else {
-					echo json_encode(array('error' => 'Something went wrong while adding the item to cart session'));
-				}
-
-			} else {
-				echo json_encode(array('error' => 'Something went wrong while adding the item to cart database'));
-			}
-
+		if (empty($qty)) {
+			$qty = 1;
 		}
+
+		if (empty($color)) {
+			$color = $product_info['color'];
+			$color = explode(',', $color);
+			$color = $color[0];
+		}
+		$available_colors  = explode(',', $product_info['color']);
+		$current_color_key = array_search($color, $available_colors);
+		unset($available_colors[$current_color_key]);
+		$data = array(
+			'id'      => $p_id,
+			'qty'     => $qty,
+			'price'   => $product_info['p_price'],
+			'name'    => $product_info['p_name'],
+			'options' => array('Color' => $color),
+			'c_id'                     => $product_info['c_id']
+		);
+
+		if ($insert_id = $this->cart->insert($data)) {
+
+			echo json_encode(array('success' => 'Item Added to cart Successfully'));
+		} else {
+			echo json_encode(array('error' => 'Something went wrong while adding the item to cart session'));
+		}
+
 	}
 
 	public function update() {
@@ -111,7 +74,7 @@ class Cart extends CI_Controller {
 
 		if (is_array($_POST)) {
 			$postdata = $_POST;
-			print_r($postdata);
+			//print_r($postdata);
 			foreach ($postdata as $key => $items) {
 
 				$data = array(
@@ -120,81 +83,13 @@ class Cart extends CI_Controller {
 
 				);
 
-				$this->cart->update($data);
-
-			}
-		}
-		exit();
-		// $p_id         = $this->input->post('pid');
-		// $qty          = $this->input->post('qty');
-		// $color        = $this->input->post('color');
-
-		if (empty($email)) {// user is not logged in than just save the data in session
-
-			if (empty($qty)) {
-				$qty = 1;
-			}
-
-			if (empty($color)) {
-				$color = $product_info['color'];
-				$color = explode(',', $color);
-				$color = $color[0];
-			}
-			$available_colors  = explode(',', $product_info['color']);
-			$current_color_key = array_search($color, $available_color);
-			unset($available_colors[$current_color_key]);
-			$data = array(
-				'id'      => $p_id,
-				'qty'     => $qty,
-				'price'   => $product_info['p_price'],
-				'name'    => $product_info['p_name'],
-				'options' => array('Color' => $color, 'available_colors' => $available_colors)
-
-			);
-
-			if ($this->cart->insert($data)) {
-				echo json_encode(array('success' => 'Item Added to cart Successfully'));
-			} else {
-				echo json_encode(array('error' => 'Something went wrong while adding the item to cart session'));
-			}
-
-		} else {// save the cart in database
-			$userdata = $this->users_model->get_user_by_email($email);
-			$user_id  = $userdata['user_id'];
-			if (empty($qty)) {
-				$qty = 1;
-			}
-			if (empty($color)) {
-				$color = $product_info['color'];
-				$color = explode(',', $color);
-				$color = $color[0];
-			}
-			$available_colors  = explode(',', $product_info['color']);
-			$current_color_key = array_search($color, $available_color);
-			unset($available_colors[$current_color_key]);
-			// add the product id(p_id) and (user_id) to database
-			if ($this->cart_model->addtocart($user_id, $p_id, $qty, $product_info['c_id'], $color)) {
-
-				$data = array(
-					'id'      => $p_id,
-					'qty'     => $qty,
-					'price'   => $product_info['p_price'],
-					'name'    => $product_info['p_name'],
-					'options' => array('Color' => $color),
-					'available_colors'         => $available_colors
-
-				);
-
-				if ($this->cart->insert($data)) {
-					echo json_encode(array('success' => 'Item Added to cart Successfully'));
+				if ($this->cart->update($data)) {
+					redirect(base_url('index.php/cart'), 'refresh');
 				} else {
-					echo json_encode(array('error' => 'Something went wrong while adding the item to cart session'));
+					redirect(base_url('index.php/cart'), 'refresh');
 				}
 
-			} else {
-				echo json_encode(array('error' => 'Something went wrong while adding the item to cart database'));
 			}
-
 		}
 
 	}
@@ -229,6 +124,8 @@ class Cart extends CI_Controller {
 
 		// Try to get the IPN data.
 		if ($this->paypal_ipn->validateIPN()) {
+			// destroy the cart
+			$this->cart->destroy();
 			// Succeeded, now let's extract the order
 			$this->paypal_ipn->extractOrder();
 			$email = $this->session->userdata('email');
