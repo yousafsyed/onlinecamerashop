@@ -8,7 +8,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="<?=base_url()?>">Brand</a>
+      <a class="navbar-brand" href="<?=base_url()?>" style="font-weight: bold; color: blueviolet;">KaRACHI CAMERA CENTER</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->

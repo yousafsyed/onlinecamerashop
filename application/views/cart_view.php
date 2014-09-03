@@ -148,6 +148,8 @@ z-index: 10000" class="alert alert-danger fade in" role="alert">
    </a></p>
 
 	</div>
+    
 	</div>
+    <?php $this->load->view('footer.php');?>
 	</body>
 	</html>
