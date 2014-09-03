@@ -209,10 +209,10 @@ z-index: 10000" class="alert alert-danger fade in" role="alert">
             <a><img src="<?=base_url()?>public/images/slider/images/6.jpg"  /></a>
             <a><img src="<?=base_url()?>public/images/slider/images/7.jpg"  /></a>
         </div>
-	<div class = "landscape_tiny_box" ><img src="<?=base_url()?>public/images/tiny/others.jpg" style="width: 250px; height: 70px;" /></div><div class = "tiny_separator"></div>
-	<div class = "landscape_tiny_box"></div><div class = "tiny_separator"></div>
-	<div class = "landscape_tiny_box"></div><div class = "tiny_separator"></div>
-	<div class = "landscape_tiny_box"></div>
+	<div class = "landscape_tiny_box" ><img src="<?=base_url()?>public/images/tiny/others.jpg" style="width: 240px; height: 70px;" /></div><div class = "tiny_separator"></div>
+	<div class = "landscape_tiny_box"><img src="<?=base_url()?>public/images/tiny/others2.jpg" style="width: 240px; height: 70px;" /></div><div class = "tiny_separator"></div>
+	<div class = "landscape_tiny_box"><img src="<?=base_url()?>public/images/tiny/others3.jpg" style="width: 240px; height: 70px;" /></div><div class = "tiny_separator"></div>
+	<div class = "landscape_tiny_box"><img src="<?=base_url()?>public/images/tiny/others4.jpg" style="width: 240px; height: 70px;" /></div>
 </div>
 <div class="row">
 

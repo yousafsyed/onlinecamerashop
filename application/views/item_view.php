@@ -289,5 +289,8 @@ foreach ($colors as $key => $color) {
 </div>
 
 </div>
+<?php $this->load->view('footer.php');?>
+
+
 </body>
 </html>

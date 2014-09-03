@@ -1,5 +1,5 @@
 <div class="row">
-<div style="height: 100px; margin-top: 15px;  background: url('<?=base_url()?>public/images/slider/images/2.jpg')">
+<div style="height: 100px;  margin-top: 15px;  background: url('<?=base_url()?>public/images/tiny/line.jpg')">
 
 </div>
 <div style="background:url();height:300px;width:100%;position: relative;text-align: center;vertical-align: top;">
