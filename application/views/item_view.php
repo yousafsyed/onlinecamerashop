@@ -68,6 +68,9 @@ $("#message").on('hide_message',function(){
 		$("#message").slideUp();
 	},2000);
 });
+
+
+
 // add item to cart
 $(document).on('click','.addtocart',function(){
 	var self = $(this);
@@ -131,32 +134,32 @@ z-index: 10000" class="alert alert-danger fade in" role="alert">
 <div class="col-md-12 product_list">
 	<ul class="nav">
 		<li>
-			<a class="active" href="category.html">Desktops (12)</a>
+			<a class="active" href="category.html">Canon (12)</a>
 			<ul>
-				<li><a href="listings.html"> - PC (11)</a></li>
-				<li><a class="active" href="listings.html"> - Mac (1)</a></li>
+				<li><a href="listings.html"> -abc(11)</a></li>
+				<li><a class="active" href="listings.html"> - 123 (1)</a></li>
 			</ul>
 		  </li>
 		<li>
-			<a href="category.html">Laptops &amp; Notebooks (5)</a>
+			<a href="category.html">lenses (5)</a>
 			<ul>
-				<li><a href="listings.html"> - Macs (0)</a></li>
-				<li><a href="listings.html"> - Windows (0)</a></li>
+				<li><a href="listings.html"> - abcd (0)</a></li>
+				<li><a href="listings.html"> - def (0)</a></li>
 			  </ul>
 		  </li>
 		<li>
-			<a href="category.html">Components (2)</a>
+			<a href="category.html">Cameras (2)</a>
 				<ul>
-				<li><a href="listings.html"> - Mice and Trackballs (0)</a></li>
-				<li><a href="listings.html"> - Monitors (2)</a></li>
-				<li><a href="listings.html"> - Printers (0)</a></li>
-				<li><a href="listings.html"> - Scanners (0)</a></li>
-				<li><a href="listings.html"> - Web Cameras (0)</a></li>
+				<li><a href="listings.html"> - abcd (0)</a></li>
+				<li><a href="listings.html"> - abcd(2)</a></li>
+				<li><a href="listings.html"> - abcd (0)</a></li>
+				<li><a href="listings.html"> - abcd (0)</a></li>
+				<li><a href="listings.html"> - abcd (0)</a></li>
 			  </ul>
 		  </li>
-		<li><a href="category.html">Tablets (1)</a></li>
-		<li><a href="category.html">Software (0)</a></li>
-		<li><a href="category.html">Phones &amp; PDAs (3)</a></li>
+		<li><a href="category.html">Flashes (1)</a></li>
+		<li><a href="category.html">Stands (0)</a></li>
+		<li><a href="category.html">Filters (3)</a></li>
 		<li><a href="category.html">Cameras (2)</a></li>
 	</ul>
 </div><!-- end sidebar -->
@@ -169,8 +172,7 @@ z-index: 10000" class="alert alert-danger fade in" role="alert">
 			    <a href="<?=base_url();?>">Home</a>
 			    </li>
 			    <li>
-			    <a href="<?=base_url('index.php/category/'.$product_info['c_id']);?>"><?=$product_info['c_name'];
-?></a>
+			    <a href="<?=base_url('index.php/category/'.$product_info['c_id']);?>"><?=$product_info['c_name']; ?></a>
 			    </li>
 			    <li class="active">
 			    <a href="#"><?=$product_info['p_name'];?></a>
@@ -289,6 +291,9 @@ foreach ($colors as $key => $color) {
 </div>
 
 </div>
+
+
+
 <?php $this->load->view('footer.php');?>
 
 
