@@ -3,9 +3,10 @@
 <head>
 	<title><?php echo $page_title?></title>
 </head>
+    <h1> Login Form </h1>
 <body>
 <form id="login_form">
-	Username:<input name="useremail" type="text"><br>
+	UserEamil:<input name="useremail" type="text"><br>
 	Password:<input name="userpassword" type="password"><br>
 	<input id="login_btn" type="submit">
 </form>

@@ -3,6 +3,7 @@
 <head>
 	<title><?php echo $page_title?></title>
 </head>
+ <h1> Registration Form </h1>
 <body>
 <form id="register_form">
 	Username:<input name="username" type="text"><br>
