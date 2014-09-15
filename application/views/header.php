@@ -10,6 +10,8 @@
       </button>
       <a class="navbar-brand" href="<?=base_url()?>" style="font-weight: bold; color: blueviolet;">KaRACHI CAMERA CENTER</a>
     </div>
+    
+
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

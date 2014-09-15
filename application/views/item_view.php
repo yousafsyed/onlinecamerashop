@@ -294,6 +294,7 @@ foreach ($colors as $key => $color) {
 
 
 
+
 <?php $this->load->view('footer.php');?>
 
 
