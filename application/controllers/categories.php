@@ -15,6 +15,7 @@ class Categories extends CI_Controller
         $this->load->library('email');
         $this->load->helper('url');
         $this->load->library("session");
+        // $data['mytable'] = ;
     }
    
     public function all()
@@ -30,7 +31,10 @@ class Categories extends CI_Controller
     function categ($id)
     {
         //echo $id; exit;
-        $this->load->view('categories',$id);
+        $this->load->model('categories_model');
+        $data['products'] = $this->categories_model->get_all($id);
+        $this->load->view('categories_view', $data);
+
     }
 
 
