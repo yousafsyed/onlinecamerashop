@@ -2,7 +2,16 @@
 error_reporting(0);
 
 ?>
-<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+
+
+
+
+
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="float: left; margin-bottom: 80px !important;">
+
+<!-- <div style="background-color: red; width: 100%; height: 40px; float: left;"> -->
+	
+</div>
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -33,10 +42,10 @@ error_reporting(0);
 					<button type="submit"  class="btn btn-default">Submit</button>
 	</form>
 <?php
-if (!$logged_in):?>
+if (!$this->session->userdata("user_id")):?>
 <form id="login_form" class="navbar-form navbar-right" role="login">
 		<div class="form-group">
-		<input type="text" name="useremail" class="form-control" placeholder="john@gmail.com">
+		<input type="text" name="useremail" class="form-control" placeholder="Majid@gmail.com">
 		<input type="password" name="userpassword" class="form-control" placeholder="type password">
 				<button type="submit" id="login_btn" class="btn btn-default">Submit</button>
 	</form>
@@ -45,7 +54,7 @@ else:?>
 <ul class="nav navbar-nav navbar-right">
 
 	<li class="dropdown">
-			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $user_name
+			<a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $this->session->userdata("user_name"); 
 ?><span class="caret"></span></a>
 	<ul class="dropdown-menu" role="menu">
 		<li><a href="<?=base_url('index.php/home/orders');?>">My Orders</a></li>
@@ -58,6 +67,9 @@ else:?>
 	</ul>
 <?php
 endif;?>
+
+
+
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>

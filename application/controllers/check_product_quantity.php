@@ -1,6 +1,5 @@
-<?php
-
-class Categories_view extends CI_Controller
+<?php 
+class cart_view extends CI_Controller
 {
 
     function __construct()
@@ -18,11 +17,9 @@ class Categories_view extends CI_Controller
     }
     
     function categories(){
-        $this->load->view('categories_view');
+        $this->load->view('cart_view');
     }
 
 }
 
 ?>
-
-

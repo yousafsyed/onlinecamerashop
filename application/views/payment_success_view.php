@@ -2,13 +2,19 @@
 <head>
 
 
-	<link rel="stylesheet" type="text/css" href="<?php echo base_url('public/css/bootstrap.min.css')?>">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('public/css/bootstrap.min.css')?>">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('public/css/bootstrap-theme.min.css"')?>">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('public/style.css')?>">
-<script src="http://code.jquery.com/jquery-latest.js"></script>
-<script type="text/javascript" src="<?=base_url('public/js/casousel.js')?>"></script>
+<script src="<?= base_url('public/js/jquery-latest.js') ?>"></script>
+<script type="text/javascript" src="<?= base_url('public/js/casousel.js') ?>"></script>
 <!-- Latest compiled and minified JavaScript -->
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<?= base_url() ?>public/js/nivo_style.css" />
+<script src="<?= base_url('public/js/bootstrap.min.js') ?>"></script>
+	<script type="text/javascript" src="<?= base_url() ?>public/js/nivo_script.js"></script>
+    
+<script>
+
+
 </head>
 <body leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0" bgcolor='#e6e6e6' font-family='verdana'>
 <div style="width: 900px;

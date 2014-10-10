@@ -39,7 +39,7 @@ class Paypal {
 
 		#API Configuration-->
 		$config["upload"]        = '1';//Do not modify
-		$config["currency_code"] = 'USD';//http://bit.ly/anciiH
+		$config["currency_code"] = 'Rs';//http://bit.ly/anciiH
 		$config["disp_tot"]      = 'Y';
 
 		#Page Layout -->
@@ -113,7 +113,7 @@ class Paypal {
 		$this->config['amount_'.$this->item]          = $item_amount;
 		$this->config['quantity_'.$this->item]        = $item_qty;
 		$this->config['item_number_'.$this->item]     = $item_number;
-		$this->config['shipping_'.$this->item]        = 20;
+		$this->config['shipping_'.$this->item]        = 0;
 		$this->config['shipping2_'.$this->item]       = 10;
 		$this->config['handling_'.$this->item]        = 0;
 		$this->config['shipping_method_'.$this->item] = 'TCS Pakistan';

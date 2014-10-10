@@ -12,7 +12,7 @@ class Cart extends CI_Controller {
 		$this->load->library("session");
 
 	}
-	public function index() {
+	public function index($error = NULL) {
 		$email = $this->session->userdata('email');
 		$data  = array();
 		if (!empty($email)) {
@@ -29,12 +29,14 @@ class Cart extends CI_Controller {
 			$data['logged_in'] = false;
 
 		}
+		if($error){$data['error'] = 'Your Entered Quantity is Greater than Avaialable Stock!';}
 		$this->load->view('cart_view', $data);
 	}
 	public function add() {
 		$email        = $this->session->userdata('email');
 		$p_id         = $this->input->post('pid');
 		$qty          = $this->input->post('qty');
+		$dbqty          = $this->input->post('dbqty');
 		$color        = $this->input->post('color');
 		$product_info = $this->products_model->getProductById($p_id);
 		//print_r($product_info);
@@ -51,30 +53,41 @@ class Cart extends CI_Controller {
 		$available_colors  = explode(',', $product_info['color']);
 		$current_color_key = array_search($color, $available_colors);
 		unset($available_colors[$current_color_key]);
+		
+		$dbqty = $product_info['p_quantity'];
 		$data = array(
 			'id'      => $p_id,
 			'qty'     => $qty,
+			'dbqty'   => $dbqty,
 			'price'   => $product_info['p_price'],
 			'name'    => $product_info['p_name'],
 			'options' => array('Color' => $color),
 			'c_id'                     => $product_info['c_id']
 		);
 
-		if ($insert_id = $this->cart->insert($data)) {
+		// print_r($data);
+		if($qty<=$dbqty)
+		{	
+			if ($insert_id = $this->cart->insert($data)) {
 
-			echo json_encode(array('success' => 'Item Added to cart Successfully'));
-		} else {
-			echo json_encode(array('error' => 'Something went wrong while adding the item to cart session'));
+				echo json_encode(array('success' => 'Item Added to cart Successfully'));
+			} else {
+				echo json_encode(array('error' => 'Something went wrong while adding the item to cart session'));
+			}
 		}
+		else echo json_encode(array('error' => 'Your entered Quantity is more than Avaialable Quantity')); 
 
 	}
 
 	public function update() {
+		echo "form submitted";
 		$email = $this->session->userdata('email');
 
 		if (is_array($_POST)) {
 			$postdata = $_POST;
 			//print_r($postdata);
+			$dbqty = $_POST['dbqty'];
+			print_r($postdata);
 			foreach ($postdata as $key => $items) {
 
 				$data = array(
@@ -83,10 +96,20 @@ class Cart extends CI_Controller {
 
 				);
 
-				if ($this->cart->update($data)) {
-					redirect(base_url('index.php/cart'), 'refresh');
-				} else {
-					redirect(base_url('index.php/cart'), 'refresh');
+			if($items['qty'] > $dbqty)
+				{
+					redirect(base_url('index.php/cart/index/error'), 'referesh');
+					// echo $items['qty'].' > '.$dbqty.' - sorry could not be updated';
+				}
+				
+				else 
+				{
+					if ($this->cart->update($data)) {
+						// echo 'cart update';
+						redirect(base_url('index.php/cart'), 'refresh');
+					} else {
+						redirect(base_url('index.php/cart'), 'refresh');
+					}
 				}
 
 			}

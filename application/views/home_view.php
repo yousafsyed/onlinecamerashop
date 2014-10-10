@@ -6,11 +6,11 @@
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('public/css/bootstrap.min.css') ?>">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('public/css/bootstrap-theme.min.css"') ?>">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('public/style.css') ?>">
-<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="<?= base_url('public/js/jquery-latest.js') ?>"></script>
 <script type="text/javascript" src="<?= base_url('public/js/casousel.js') ?>"></script>
 <!-- Latest compiled and minified JavaScript -->
 <link rel="stylesheet" type="text/css" href="<?= base_url() ?>public/js/nivo_style.css" />
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="<?= base_url('public/js/bootstrap.min.js') ?>"></script>
 	<script type="text/javascript" src="<?= base_url() ?>public/js/nivo_script.js"></script>
     
 <script>
@@ -75,7 +75,7 @@ $(window).load(function() {
 						            		 	url = '<?= base_url() ?>public/images/products/'+value.p_id+'/image.jpg';
 						            		 }
 
-									  	latestproductsData += '<li data-pid= "'+value.p_id+'"><div class="col-md-3 product_container"> <img src="'+url+'" alt="'+value.p_name+'"><div class="product-name"><a href="<?= base_url("index.php/item") ?>/'+value.p_id+'">'+value.p_name+'</div><div>'+value.p_price+'<span> EUR</span></div><div class="buttons_p"><button class="addtocart btn btn-primary btn-xs">Add To Cart</button></div></div></div></li>';
+									  	latestproductsData += '<li data-pid= "'+value.p_id+'"><div class="col-md-3 product_container"> <img src="'+url+'" alt="'+value.p_name+'"><div class="product-name"><a href="<?= base_url("index.php/item") ?>/'+value.p_id+'">'+value.p_name+'</div><div> <span> Rs: '+value.p_price+'</span></div><div class="buttons_p"><button class="addtocart btn btn-primary btn-xs">Add To Cart</button></div></div></div></li>';
                                         console.log("<?= base_url("index.php/item") ?>/"+value.p_id);
 									});
 									latestproductsData += '</ul>';
@@ -205,39 +205,20 @@ z-index: 10000" class="alert alert-danger fade in" role="alert">
 
 <?php $this->load->view('header.php'); ?>
 
-
-<div class="container">
+<?php $this->load->view('slider.php'); ?>
 
 
 <div class="row">
-		<div id="slider" class="nivoSlider">
-            <a><img src="<?= base_url() ?>public/images/slider/images/1.jpg"  /></a>
-            <a><img src="<?= base_url() ?>public/images/slider/images/2.jpg"  /></a>
-            <a><img src="<?= base_url() ?>public/images/slider/images/3.jpg"  /></a>
-            <a><img src="<?= base_url() ?>public/images/slider/images/4.jpg"  /></a>
-            <a><img src="<?= base_url() ?>public/images/slider/images/5.jpg"  /></a>
-            <a><img src="<?= base_url() ?>public/images/slider/images/6.jpg"  /></a>
-            <a><img src="<?= base_url() ?>public/images/slider/images/7.jpg"  /></a>
-        </div>
-	       <div class = "landscape_tiny_box"><img src="<?= base_url() ?>public/images/tiny/others.jpg" style="width: 240px; height: 70px;" /></div><div class = "tiny_separator"></div>
-	       <div class = "landscape_tiny_box"><img src="<?= base_url() ?>public/images/tiny/others2.jpg" style="width: 240px; height: 70px;" /></div><div class = "tiny_separator"></div>
-	       <div class = "landscape_tiny_box"><img src="<?= base_url() ?>public/images/tiny/others3.jpg" style="width: 240px; height: 70px;" /></div><div class = "tiny_separator"></div>
-	       <div class = "landscape_tiny_box"><img src="<?= base_url() ?>public/images/tiny/others4.jpg" style="width: 240px; height: 70px;" /></div>
 
-</div>
-<div class="row">
-
-	   <div class="landscape_header col-6">Categories</div>
-			<div id="categories">
-
-				<img class="loader" src="<?= base_url('public/images/loader.gif') ?>">
-
-			</div>
+	   <div class="landscape_header col-6" style="margin-top: 60px; font-weight: bold; font-size: 15px" > Categories </div>
+			<div id="categories" >
+            <img class="loader" src="<?= base_url('public/images/loader.gif') ?>">
+            </div>
 </div>
 <div class="row">
 
 
-		<div class = "landscape_header"> Latest Products</div>
+		<div class = "landscape_header"> Latest Products </div>
 		<div id="latest_products">
 
 			<img class="loader" src="<?= base_url('public/images/loader.gif') ?>">
@@ -247,11 +228,9 @@ z-index: 10000" class="alert alert-danger fade in" role="alert">
 <div class="row">
 
 
-		<div class="landscape_header"> Most View Products</div>
+		<div class="landscape_header"> Most View Products </div>
 		<div id="latest_products" style="width: 1000px; height: 250px; visibility: visible; overflow: hidden; position: relative;"><a class="btnprev" style="position: absolute; top: 50%; z-index: 23;"><span class="glyphicon glyphicon-chevron-left"></span></a><a class="btnnext" style="position: absolute; top: 50%; z-index: 23; left: 97%;"><span class="glyphicon glyphicon-chevron-right"></span></a><ul style="list-style: none; padding: 0px; width: 408px; left: 0px; position: absolute;"><li data-pid="5"><div class="col-md-3 product_container"> <img src="http://localhost:8080/onlinecamerashop/public/images/products/5/image.jpg" alt="Camera Lense for Canon"><div class="product-name"> <a href="http://localhost:8080/onlinecamerashop/index.php/item/5">Camera Lense for Canon</a></div><div><a href="http://localhost:8080/onlinecamerashop/index.php/item/5">30<span> EUR</span></a></div><div class="buttons_p"><a href="http://localhost:8080/onlinecamerashop/index.php/item/5"><button class="addtocart btn btn-primary btn-xs">Add To Cart</button></a></div></div></li><li data-pid="4"><div class="col-md-3 product_container"><a href="http://localhost:8080/onlinecamerashop/index.php/item/5"> <img src="http://localhost:8080/onlinecamerashop/public/images/products/4/image.jpg" alt="Camera"></a><div class="product-name"><a href="http://localhost:8080/onlinecamerashop/index.php/item/5"></a><a href="http://localhost:8080/onlinecamerashop/index.php/item/4">Camera</a></div><div><a href="http://localhost:8080/onlinecamerashop/index.php/item/4">100<span> EUR</span></a></div><div class="buttons_p"><a href="http://localhost:8080/onlinecamerashop/index.php/item/4"><button class="addtocart btn btn-primary btn-xs">Add To Cart</button></a></div></div></li></ul></div>
-
-
-            </div>
+        </div>
 
 </div>
 </div>

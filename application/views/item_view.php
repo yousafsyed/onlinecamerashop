@@ -15,10 +15,10 @@
 }
 
 </style>
-<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="<?= base_url('public/js/jquery-latest.js') ?>"></script>
 
 <!-- Latest compiled and minified JavaScript -->
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="<?= base_url('public/js/bootstrap.min.js') ?>"></script>
 <script>
 function UrlExists(url)
 {
@@ -122,10 +122,18 @@ z-index: 10000" class="alert alert-danger fade in" role="alert">
 
       <span class="messageclass"></span>
 </div>
+
+
+
 <?php $this->load->view('header.php');?>
+
+
+
 <div class="container">
 <div class="row">
         <div class="col-md-4">
+
+
 
 	<!-- start sidebar -->
 <ul class="breadcrumb">
@@ -185,23 +193,24 @@ z-index: 10000" class="alert alert-danger fade in" role="alert">
 			<h1><?=$product_info['p_name']?></h1>
 		 </div>
 	</div>
-	 <hr>
+	 <hr></hr>
 
 	 <div class="row">
 		 <div class="col-md-4">
 
 			<img alt="" style="width: 200px;" src="<?=base_url('public/images/products/'.$product_info['p_id'].DIRECTORY_SEPARATOR.$images[0])?>">
 
+
 <?php
 foreach ($images as $key => $image) {
 	# code...
 
 	?>
-																	<div class="col-xs-5 thumbwrapper">
-																	<a href="#" class="thumbnail">
-																	   <img src="<?=base_url('public/images/products/'.$product_info['p_id'].DIRECTORY_SEPARATOR.$image)?>" alt="">
-																			</a>
-																	</div>
+		<div class="col-xs-5 thumbwrapper">
+		<a href="#" class="thumbnail">
+		   <img src="<?=base_url('public/images/products/'.$product_info['p_id'].DIRECTORY_SEPARATOR.$image)?>" alt="">
+				</a>
+		</div>
 
 	<?php }?>
 		</div>
@@ -219,7 +228,7 @@ foreach ($images as $key => $image) {
 
 		<div class="col-md-6">
 			<h2>
-				<strong>Price: $<?=$product_info['p_price']?></strong> <br><br>
+				<strong>Price: Rs: <?=$product_info['p_price']?></strong> <br><br>
 			</h2>
 		</div>
 
@@ -229,6 +238,7 @@ foreach ($images as $key => $image) {
   <div class="col-xs-2">
     <input type="text" name="qty" class="form-control" placeholder="1">
     <input type="hidden" name="pid" value="<?=$product_info['p_id']?>" >
+    <input type="hidden" name="dbqty" value="<?=$product_info['dbqty']?>" >
   </div>
   <div class="col-xs-3">
   <select name="color">
@@ -240,14 +250,22 @@ foreach ($colors as $key => $color) {
 	?>
 		  	<option value="<?=$color?>"><?=$color?></option>
 	<?php }?>
-</select>
+    
 
+</select>
 
 
   </div>
   <div class="col-xs-3">
+  	
     <button class="btn btn-primary addtocart">Add to Cart</button>
   </div>
+  
+  <div> <?php $this->load->view('rating.php'); ?> 
+  </div>
+
+  
+  
 </form>
 </div>
 		</div>
@@ -269,7 +287,7 @@ foreach ($colors as $key => $color) {
 
     </ul>
     <div class="tab-content">
-    <div class="tab-pane active" id="1">
+    <div class="tab-pane active" id="1" style="height: 150px;">
 <?=$product_info['p_description']?>
     </div>
     <div class="tab-pane" id="2">

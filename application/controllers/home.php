@@ -25,9 +25,13 @@
 				// get user data
 				$userdata = $this->users_model->get_user_by_email($email);
 
+				$data['user_id'] = $userdata['user_id'];
+
 				$data['email']     = $email;
 				$data['user_name'] = $userdata['user_name'];
 				$data['logged_in'] = true;
+				// $this->session->set_userdata('user_id' , $userdata['user_id']);
+				$this->session->set_userdata('user_email' , $userdata['user_email']);
 			} else {
 
 				//not logged it
@@ -65,7 +69,7 @@
 			$password_hash = md5($password);
 			$login         = $this->users_model->login_confirmation($email, $password_hash);
 			if ($login) {
-				$session_data = array("email" => $email);
+				$session_data = array("email" => $email, "user_id" =>$login[0]['user_id'], "user_name"=>$login[0]['user_name']);
 				$this->session->set_userdata($session_data);
 
 				// get the data of user from cart table

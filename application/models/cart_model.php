@@ -32,4 +32,11 @@ class Cart_model extends CI_Model {
 		}
 	}
 
+	public function get_qty($id)
+	{
+		$this->db->select('qty')->from('onlinecamerashop_products')->where('p_id',$id);
+		$q = $this->db->get();
+		return  $q->result_array();
+	}
+
 }

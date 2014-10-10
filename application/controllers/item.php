@@ -39,7 +39,8 @@ class Item extends CI_Controller {
 				$data['user_name']    = $userdata['user_name'];
 				$data['logged_in']    = true;
 				$data['product_info'] = $product_info;
-				$data['images']       = $files;
+				$data['images']       = $files;       /*problem */
+
 			} else {
 				//not logged it
 				$data['user_name']    = 'Guest';

@@ -87,12 +87,13 @@ class Users_model extends  CI_Model{
 
     function login_confirmation($email,$password_hash){
      // code here
-      $this->db->select("user_id");
         $this->db->where("user_email",$email);
         $this->db->where("user_password",$password_hash);
         $query = $this->db->get("onlinecamerashop_users");
         if($query->num_rows() > 0){
-            return true;
+            $a = $query->result_array();
+             return $a;
+            // return true;
         }else{
             return false;
         }

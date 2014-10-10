@@ -9,12 +9,16 @@
 	Username:<input name="username" type="text"><br>
 	Password:<input name="password" type="password"><br>
     Password confirm<input name="password2" type="password"><br>
-    email:<input id="email" name="email" type="email"><span id="email_message"></span><br>
-    mobile No:<input id="mobile" name="mobile" type="number"><span id="mobile_message"></span><br>
-    address:<input name="address" type="text"><br>
+    Email:<input id="email" name="email" type="email"><span id="email_message"></span><br>
+    Mobile No:<input id="mobile" name="mobile" type="number"><span id="mobile_message"></span><br>
+    Address:<input name="address" type="text"><br>
 
 	<input id="register_btn" type="submit">
 </form>
+
+
+
+
 <div id="message"></div>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>

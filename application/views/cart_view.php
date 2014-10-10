@@ -3,13 +3,13 @@
 <title></title>
 <meta name="" content="">
 
-<link rel="stylesheet" type="text/css" href="<?php echo base_url('public/css/bootstrap.min.css')?>">
+<link rel="stylesheet" type="text/css" href="<?php echo base_url('public/css/bootstrap.min.css') ?>">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('public/css/bootstrap-theme.min.css"')?>">
 <link rel="stylesheet" type="text/css" href="<?php echo base_url('public/style.css')?>">
-<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="<?= base_url('public/js/jquery-latest.js') ?>"></script>
 <script type="text/javascript" src="<?=base_url('public/js/casousel.js')?>"></script>
 <!-- Latest compiled and minified JavaScript -->
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+<script src="<?= base_url('public/js/bootstrap.min.js') ?>"></script>
 <script>
 
 $(document).ready(function(){
@@ -56,6 +56,9 @@ $(".checkout").click(function(){
 });
 
 });// document ready ends
+
+
+
 </script>
 </head>
 <body>
@@ -73,6 +76,13 @@ z-index: 10000" class="alert alert-danger fade in" role="alert">
 
 <div class="row">
 <?php echo form_open(base_url('index.php/cart/update'));?>
+
+<?php if($error){?>
+<div class="alert alert-danger" role="alert">
+<?php echo $error; ?>
+</div>
+<?php } ?>
+
 <table class="table table-bordered table-condensed table-hover" >
 
 <tr class="active">
@@ -80,6 +90,7 @@ z-index: 10000" class="alert alert-danger fade in" role="alert">
   <th>Item Description</th>
   <th style="text-align:right">Item Price</th>
   <th style="text-align:right">Sub-Total</th>
+  <th style="text-align:right">delete</th>
 </tr>
 
 <?php $i = 1;?>
@@ -90,7 +101,11 @@ z-index: 10000" class="alert alert-danger fade in" role="alert">
 
 	<tr>
 	  <td><?php echo form_input(array('name' => $i.'[qty]', 'value' => $items['qty'], 'maxlength' => '3', 'size' => '5'));?>
-        <?php echo form_input(array('name' => $i.'[pid]', 'value' => $items['id'], 'type' => 'hidden'));?>
+        <?php echo form_input(array('name' => $i.'[p_id]', 'value' => $items['id'], 'type' => 'hidden'));?>
+        <?php 
+       // $arr = array('name' => 'dbqty', 'value' => $items['qty']);
+        echo form_hidden('dbqty', $items['qty']);
+        echo form_hidden('p_id', $items['p_id']); ?>
 </td>
 	  <td>
 <?php echo $items['name'];?>
@@ -137,7 +152,7 @@ z-index: 10000" class="alert alert-danger fade in" role="alert">
 
 	</table>
 
-	<p><button class="btn btn-primary"> Update Cart</button></p>
+	<p><button class="btn btn-primary" type="submit"> Update Cart</button></p>
 <?=form_close();?>
   <p><a href="<?=base_url('index.php/cart/checkout')?>" class="btn btn-default has-spinner checkout">
 
@@ -151,5 +166,7 @@ z-index: 10000" class="alert alert-danger fade in" role="alert">
     
 	</div>
     <?php $this->load->view('footer.php');?>
+
+
 	</body>
 	</html>
