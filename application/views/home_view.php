@@ -149,7 +149,10 @@ $("#message").on('hide_message',function(){
 		$("#message").slideUp();
 	},2000);
 });
-// add item to cart
+
+
+//========================= add item to cart
+
 $(document).on('click','.addtocart',function(){
 	var self = $(this);
 	var pid = self.parents('li').data('pid');
@@ -186,6 +189,8 @@ $(document).on('click','.addtocart',function(){
 });
 
 // add item to cart ends
+
+
 $('#slider').nivoSlider();
 
 });// document ready ends
@@ -206,6 +211,10 @@ z-index: 10000" class="alert alert-danger fade in" role="alert">
 <?php $this->load->view('header.php'); ?>
 
 <?php $this->load->view('slider.php'); ?>
+
+
+
+
 
 
 <div class="row">

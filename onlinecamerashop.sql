@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 25, 2014 at 12:25 PM
+-- Generation Time: Oct 13, 2014 at 05:34 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -260,6 +260,7 @@ CREATE TABLE IF NOT EXISTS `onlinecamerashop_brand` (
   `b_id` int(11) NOT NULL AUTO_INCREMENT,
   `b_name` varchar(200) NOT NULL,
   `b_description` text NOT NULL,
+  `image` int(11) NOT NULL,
   PRIMARY KEY (`b_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
@@ -267,9 +268,9 @@ CREATE TABLE IF NOT EXISTS `onlinecamerashop_brand` (
 -- Dumping data for table `onlinecamerashop_brand`
 --
 
-INSERT INTO `onlinecamerashop_brand` (`b_id`, `b_name`, `b_description`) VALUES
-(1, 'Apple', ''),
-(2, 'Cannon', '');
+INSERT INTO `onlinecamerashop_brand` (`b_id`, `b_name`, `b_description`, `image`) VALUES
+(1, 'Apple', '', 0),
+(2, 'Cannon', '', 0);
 
 -- --------------------------------------------------------
 
@@ -285,22 +286,7 @@ CREATE TABLE IF NOT EXISTS `onlinecamerashop_cart` (
   `qty` int(11) NOT NULL,
   `cart_id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`cart_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
-
---
--- Dumping data for table `onlinecamerashop_cart`
---
-
-INSERT INTO `onlinecamerashop_cart` (`user_id`, `p_id`, `c_id`, `color`, `qty`, `cart_id`) VALUES
-(1, 4, 1, 'white', 1, 6),
-(1, 5, 2, 'black', 1, 7),
-(1, 5, 2, 'black', 1, 8),
-(1, 4, 1, 'white', 1, 9),
-(1, 4, 1, 'white', 1, 10),
-(1, 5, 2, 'black', 1, 11),
-(1, 5, 2, 'black', 1, 12),
-(1, 5, 2, 'black', 1, 13),
-(1, 5, 2, 'black', 3, 14);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -312,20 +298,24 @@ CREATE TABLE IF NOT EXISTS `onlinecamerashop_categories` (
   `c_id` int(11) NOT NULL AUTO_INCREMENT,
   `c_name` varchar(100) NOT NULL,
   `c_description` text NOT NULL,
+  `image` int(11) NOT NULL,
   PRIMARY KEY (`c_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data for table `onlinecamerashop_categories`
 --
 
-INSERT INTO `onlinecamerashop_categories` (`c_id`, `c_name`, `c_description`) VALUES
-(1, 'Mobile', ''),
-(2, 'Cameras', ''),
-(3, 'Headphones', ''),
-(4, 'Accessories', ''),
-(5, 'Laptops', ''),
-(6, 'ETC', '');
+INSERT INTO `onlinecamerashop_categories` (`c_id`, `c_name`, `c_description`, `image`) VALUES
+(1, 'Mobile', '', 0),
+(2, 'Cameras', '', 0),
+(3, 'Headphones', '', 0),
+(4, 'Accessories', '', 0),
+(5, 'Flash', '', 0),
+(6, 'bht kuch', '', 0),
+(12, 'massab', '', 0),
+(13, 'sanwal', '', 0),
+(14, 'gull khan', 'bndy da puter', 1);
 
 -- --------------------------------------------------------
 
@@ -344,16 +334,38 @@ CREATE TABLE IF NOT EXISTS `onlinecamerashop_products` (
   `color` text NOT NULL,
   `b_id` int(11) NOT NULL,
   `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `image` text NOT NULL,
   PRIMARY KEY (`p_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
 
 --
 -- Dumping data for table `onlinecamerashop_products`
 --
 
-INSERT INTO `onlinecamerashop_products` (`p_id`, `c_id`, `p_name`, `p_price`, `p_quantity`, `p_description`, `model`, `color`, `b_id`, `date_added`) VALUES
-(4, 1, 'Camera', '100', '300', '14234234wfadf', 'B463-23', 'white,blue,green', 2, '2014-07-26 18:26:54'),
-(5, 2, 'Camera Lense for Canon', '30', '200', 'description', 'VHYBQ', 'black,white,yellow', 2, '2014-07-26 18:27:35');
+INSERT INTO `onlinecamerashop_products` (`p_id`, `c_id`, `p_name`, `p_price`, `p_quantity`, `p_description`, `model`, `color`, `b_id`, `date_added`, `image`) VALUES
+(4, 1, 'Camera', '100', '10', '14234234wfadf', 'B463-23', 'white,blue,green', 2, '2014-07-26 18:26:54', ''),
+(5, 2, 'Lense for Canon', '30', '20', 'description', 'VHYBQ', 'black,white,yellow', 2, '2014-07-26 18:27:35', ''),
+(6, 2, 'canon', '123', '11', 'afdgdjhgkghd', '1we2', 'blue', 1, '2014-09-11 20:07:19', ''),
+(7, 2, 'canon', '123', '11', 'afdgdjhgkghd', '1we2', 'blue', 1, '2014-09-11 20:07:24', ''),
+(8, 2, 'nikon', '5550', '12', 'description', 'VHYBQ', 'black,white,yellow', 2, '2014-07-26 18:27:35', ''),
+(9, 2, 'nikon', '200', '20', 'hjhgjmjgm', 'ddsc', 'black', 0, '2014-09-23 12:09:01', ''),
+(10, 2, 'cannn', '200', '20', '', '', '', 0, '2014-09-23 12:09:28', ''),
+(11, 2, 'iphone', '15000', '15', 'dcaad', '', '', 0, '2014-09-23 12:12:57', ''),
+(12, 2, 'nokia', '2500', '15', 'sdsadsaas', '', '', 0, '2014-09-23 12:15:20', ''),
+(13, 2, 'nokia', '200', '15', 'sdsadsaas', '', '', 0, '2014-09-23 12:15:20', ''),
+(14, 2, 'nokia', '500', '10', 'sdsadsaas', '', '', 0, '2014-09-23 12:15:20', ''),
+(15, 2, 'nokia', '120', '10', 'sdsadsaas', '', '', 0, '2014-09-23 12:15:20', ''),
+(16, 2, 'nokia x', '20', '20', 'sdsadsaas', '', '', 0, '2014-09-23 12:15:20', ''),
+(17, 2, 'google', '100', '12', 'sdsadsaas', '', '', 0, '2014-09-23 12:15:20', ''),
+(18, 2, 'pepsi', '25', '10', 'sdsadsaas', '', '', 0, '2014-09-23 12:15:20', ''),
+(19, 2, 'coco', '10', '10', 'sdsadsaas', '', '', 0, '2014-09-23 12:15:20', ''),
+(20, 2, 'A4tech', '15', '10', 'sdsadsaas', '', '', 0, '2014-09-23 12:15:20', ''),
+(21, 2, 'samsung', '200', '10', 'sdsadsaas', '', '', 0, '2014-09-23 12:15:20', ''),
+(22, 2, 'tech', '100', '10', 'sdsadsaas', '', '', 0, '2014-09-23 12:15:20', ''),
+(23, 2, 'dell', '100', '10', 'sdsadsaas', '', '', 0, '2014-09-23 12:15:20', ''),
+(24, 2, 'hp', '1500', '10', 'sdsadsaas', '', '', 0, '2014-09-23 12:15:20', ''),
+(25, 2, 'dew', '120', '10', 'sdsadsaas', '', '', 0, '2014-09-23 12:15:20', ''),
+(26, 2, 'qmobile', '15', '10', 'sdsadsaas', '', 'white,blue', 0, '2014-09-23 12:15:20', '');
 
 -- --------------------------------------------------------
 
@@ -389,7 +401,7 @@ CREATE TABLE IF NOT EXISTS `onlinecamerashop_users` (
   `mobile_confirmation_code` varchar(4) NOT NULL,
   `user_address` text NOT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `onlinecamerashop_users`
@@ -397,7 +409,7 @@ CREATE TABLE IF NOT EXISTS `onlinecamerashop_users` (
 
 INSERT INTO `onlinecamerashop_users` (`user_id`, `user_name`, `user_password`, `user_email`, `email_confirmed`, `email_confirmation_code`, `mobile_no`, `mobile_confirmed`, `mobile_confirmation_code`, `user_address`) VALUES
 (1, 'Yousaf', 'fb3275643d7eb0587b2fff396acf9e01', 'mmesunny@gmail.com', 'yes', '50984f2d93cd975ccf42f90cefc40cd3', '03009602698', 'no', '2616', 'asdasdasd'),
-(2, 'Yasir', 'fb3275643d7eb0587b2fff396acf9e01', 'yasir@gmail.com', 'no', '7be9bc39cef87c6b1bbfca9adc8f98d8', '03327529216', 'no', '1174', 'aosdoaisdjoqiweruoijfodifj');
+(3, 'majid', 'e10adc3949ba59abbe56e057f20f883e', 'majid@gmail.com', 'no', '6bc108fb93c440d0a3955b06a5e636b1', '03317675733', 'no', '2014', 'rawalpindi');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
